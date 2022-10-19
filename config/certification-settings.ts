@@ -31,7 +31,8 @@ export enum SuperBlocks {
   DataAnalysisPy = 'data-analysis-with-python',
   InfoSec = 'information-security',
   MachineLearningPy = 'machine-learning-with-python',
-  CodingInterviewPrep = 'coding-interview-prep'
+  CodingInterviewPrep = 'coding-interview-prep',
+  degree = 'degree'
 }
 
 export const certIds = {

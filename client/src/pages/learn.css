@@ -1,0 +1,23 @@
+.container {
+  width: 100% !important;
+  padding: 180px !important;
+}
+
+.choose-path {
+  text-align: center;
+}
+
+.earn-heading {
+font-weight: bold;
+font-size: 1.2rem;
+}
+
+.row-1 {
+  display: flex;
+  column-gap: 80px;
+}
+
+.column-1 {
+  width: 50%;
+  max-width: 50%;
+}

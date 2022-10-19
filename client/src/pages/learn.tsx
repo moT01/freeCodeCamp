@@ -8,6 +8,7 @@ import { createSelector } from 'reselect';
 
 import Intro from '../components/Intro';
 import Map from '../components/Map';
+import Map2 from '../components/Map/map2';
 import { Spacer } from '../components/helpers';
 import LearnLayout from '../components/layouts/learn';
 import {
@@ -57,6 +58,8 @@ interface LearnPageProps {
   };
 }
 
+import './learn.css';
+
 function LearnPage({
   isSignedIn,
   fetchState: { pending, complete },
@@ -75,20 +78,40 @@ function LearnPage({
     <LearnLayout>
       <Helmet title={t('metaTags:title')} />
       <Grid>
+        <Spacer size={6} />
         <Row>
-          <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
-            <Intro
-              complete={complete}
-              completedChallengeCount={completedChallengeCount}
-              isSignedIn={isSignedIn}
-              name={name}
-              pending={pending}
-              slug={slug}
-            />
-            <Map />
-            <Spacer size={2} />
-          </Col>
+          <h1 className='choose-path'>Choose your path</h1>
         </Row>
+        <Spacer size={3} />
+        <div className='row-1'>
+
+          <div className='column-1'>
+            <p>
+              <span className='earn-heading'>
+                Earn free, verified certifications.
+              </span>{' '}
+              Ideal for people who want to find work as a developer sooner, or
+              who already have a bachelor's degree. Each certification will
+              involve about 300 hours of coursework.
+            </p>
+            <Spacer size={1} />
+            <Map />
+          </div>
+
+          <div className='column-1'>
+            <p>
+              <span className='earn-heading'>
+                Earn free, accredited university degrees.
+              </span>{' '}
+              An Associates of Science in Mathematics and a Bachelors of Science
+              in Computer Science. Ideal for people who don't yet have
+              university degrees. Can take 4 years or longer.
+            </p>
+            <Spacer size={1} />
+            <Map2 />
+          </div>
+
+        </div>
       </Grid>
     </LearnLayout>
   );

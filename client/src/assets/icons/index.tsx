@@ -12,6 +12,7 @@ import Clipboard from './clipboard';
 import PythonIcon from './python-icon';
 import ResponsiveDesign from './responsive-design';
 import Shield from './shield';
+import Degree from './degree';
 
 const iconMap = {
   [SuperBlocks.RespWebDesignNew]: ResponsiveDesign,
@@ -27,7 +28,8 @@ const iconMap = {
   [SuperBlocks.DataAnalysisPy]: Analytics,
   [SuperBlocks.InfoSec]: Shield,
   [SuperBlocks.MachineLearningPy]: TensorflowIcon,
-  [SuperBlocks.CodingInterviewPrep]: Algorithm
+  [SuperBlocks.CodingInterviewPrep]: Algorithm,
+  'degree': Degree
 };
 
 const generateIconComponent = (

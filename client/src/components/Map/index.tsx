@@ -69,7 +69,10 @@ function renderLearnMap(
   currentSuperBlock: MapProps['currentSuperBlock']
 ) {
   nodes = nodes.filter(
-    ({ challenge }) => challenge.superBlock !== currentSuperBlock
+    ({ challenge }) =>
+      challenge.superBlock !== 'responsive-web-design' &&
+      challenge.superBlock !== '2022/javascript-algorithms-and-data-structures' &&
+      challenge.superBlock !== 'coding-interview-prep'
   );
   return curriculumLocale === 'english' ? (
     <ul data-test-label='learn-curriculum-map'>
