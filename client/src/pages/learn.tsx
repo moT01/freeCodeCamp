@@ -80,7 +80,7 @@ function LearnPage({
       <Grid>
         <Spacer size={6} />
         <Row>
-          <h1 className='choose-path'>Choose your path</h1>
+          <h1 className='choose-path'>Choose Your Learning Path</h1>
         </Row>
         <Spacer size={3} />
         <div className='row-1'>

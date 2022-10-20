@@ -1,3 +1,16 @@
+import {
+  faBook,
+  faBrain,
+  faMicrochip,
+  faLanguage,
+  faChartArea,
+  faLightbulb,
+  faWaveSquare,
+  faSquareRootVariable,
+  faQuestion,
+  faQuestionCircle
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { graphql, useStaticQuery } from 'gatsby';
 import i18next from 'i18next';
 import React from 'react';
@@ -40,50 +53,41 @@ const linkSpacingStyle = {
   alignItems: 'center'
 };
 
-function renderMap2(
-  nodes: ChallengeNode[]
-) {
+function renderMap2(nodes: ChallengeNode[]) {
+  const superBlocks = [
+    'Philosophy of Knowledge',
+    'History of Computation',
+    'College Algebra',
+    'Foundations of Critical Thinking',
+    'Precalculus',
+    'Ethical Reasoning',
+    'Calculus I'
+  ];
 
-const superBlocks = [
-  "Philosophy of Knowledge",
-  "History of Computation",
-  "College Algebra",
-  "Foundations of Critical Thinking",
-  "Precalculus",
-  "Ethical Reasoning",
-  "Calculus I",
-  "English Rhetoric and Composition",
-  "Probability and Statistics I",
-  "Health and Wellness",
-  "Calculus II",
-  "Probability and Statistics II",
-  "Professional and Technical Writing",
-  "Calculus III",
-  "Discrete Mathematics",
-  "Economics of Technology and the Labor Market",
-  "Linear Algebra",
-  "Theory of Computation",
-  "Organizational Behavior",
-  "Applied Quantitative Reasoning"
-];
+  const icons = {
+    'Philosophy of Knowledge': faQuestionCircle,
+    'History of Computation': faMicrochip,
+    'College Algebra': faSquareRootVariable,
+    'Foundations of Critical Thinking': faBrain,
+    Precalculus: faChartArea,
+    'Ethical Reasoning': faBrain,
+    'Calculus I': faBrain
+  };
 
   return (
     <ul data-test-label='learn-curriculum-map'>
       {superBlocks.map((superBlock, i) => (
         <li key={i}>
-          <Link
-            className='btn link-btn btn-lg'
-            to={`/learn/${superBlock}/`}
-          >
+          <Link className='btn link-btn btn-lg' to={`/learn/${superBlock}/`}>
             <div style={linkSpacingStyle}>
-              {generateIconComponent('degree', 'map-icon')}
+              <FontAwesomeIcon className='map-icon' icon={icons[superBlock]} />
               {superBlock}
             </div>
           </Link>
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 export function Map2({
@@ -95,9 +99,7 @@ export function Map2({
    * from each superblock, leaving you with one challenge from each
    * superblock
    */
-  const nodes: any = [
-
-  ];
+  const nodes: any = [];
 
   return (
     <div className='map-ui' data-test-label='learn-curriculum-map'>
