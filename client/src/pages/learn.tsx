@@ -78,7 +78,7 @@ function LearnPage({
     <LearnLayout>
       <Helmet title={t('metaTags:title')} />
       <Grid>
-        <Spacer size={6} />
+        <Spacer size={3} />
         <Row>
           <h1 className='choose-path'>Choose Your Learning Path</h1>
         </Row>
