@@ -89,10 +89,10 @@ function LearnPage({
             <p>
               <span className='earn-heading'>
                 Earn free, verified certifications.
-              </span>{' '}
-              Ideal for people who want to find work as a developer sooner, or
+              </span>
+              <p>Ideal for people who want to find work as a developer sooner, or
               who already have a bachelor's degree. Each certification will
-              involve about 300 hours of coursework.
+              involve about 300 hours of coursework.</p>
             </p>
             <Spacer size={1} />
             <Map />
@@ -102,10 +102,10 @@ function LearnPage({
             <p>
               <span className='earn-heading'>
                 Earn free, accredited university degrees.
-              </span>{' '}
-              An Associates of Science in Mathematics and a Bachelors of Science
+              </span>
+              <p>An Associates of Science in Mathematics and a Bachelors of Science
               in Computer Science. Ideal for people who don't yet have
-              university degrees. Can take 4 years or longer.
+              university degrees and want to earn them. Can take 4 years or longer.</p>
             </p>
             <Spacer size={1} />
             <Map2 />
