@@ -84,15 +84,16 @@ function LearnPage({
         </Row>
         <Spacer size={3} />
         <div className='row-1'>
-
           <div className='column-1'>
             <p>
               <span className='earn-heading'>
                 Earn free, verified certifications.
               </span>
-              <p>Ideal for people who want to find work as a developer sooner, or
-              who already have a bachelor's degree. Each certification will
-              involve about 300 hours of coursework.</p>
+              <p>
+                Ideal for people who want to find work as a developer sooner, or
+                who already have a bachelor's degree. Each certification will
+                involve about 300 hours of coursework.
+              </p>
             </p>
             <Spacer size={1} />
             <Map />
@@ -103,14 +104,15 @@ function LearnPage({
               <span className='earn-heading'>
                 Earn free, accredited university degrees.
               </span>
-              <p>An Associates of Science in Mathematics and a Bachelors of Science
-              in Computer Science. Ideal for people who don't yet have
-              university degrees and want to earn them. Can take 4 years or longer.</p>
+              <p>
+                An Associates of Science in Mathematics and a Bachelors of
+                Science in Computer Science. Ideal for people who want to earn
+                these university degrees. Can take 4 years or longer.
+              </p>
             </p>
             <Spacer size={1} />
             <Map2 />
           </div>
-
         </div>
       </Grid>
     </LearnLayout>
