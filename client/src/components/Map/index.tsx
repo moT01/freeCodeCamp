@@ -16,6 +16,7 @@ import { Link, Spacer } from '../helpers';
 import { getSuperBlockTitleForMap } from '../../utils/superblock-map-titles';
 
 import './map.css';
+import CertificationIcon from '../../assets/icons/certification';
 
 const { curriculumLocale, showNewCurriculum, showUpcomingChanges } = envData;
 
@@ -31,19 +32,68 @@ const linkSpacingStyle = {
   gap: '15px'
 };
 
+const stage1 = [
+  '2022/responsive-web-design',
+  'javascript-algorithms-and-data-structures',
+  'front-end-development-libraries'
+];
+
+const stage2 = [
+  'relational-database',
+  'back-end-development-and-apis',
+  'quality-assurance',
+  'information-security'
+];
+
+const stage3 = [
+  'scientific-computing-with-python',
+  'data-analysis-with-python',
+  'machine-learning-with-python',
+  'college-algebra-with-python'
+];
+
+const stage4 = [
+  'coding-interview-prep',
+  'the-odin-project',
+  'project-euler',
+  'responsive-web-design'
+];
+
+const allSuperBlocks = ['', ...stage1, ...stage2, ...stage3, ...stage4];
+const currentCert = 5;
+
 function MapLi({
   superBlock,
-  landing = false
+  landing = false,
+  last = false
 }: {
-  superBlock: SuperBlocks;
+  superBlock: SuperBlocks | string;
   landing: boolean;
+  last?: boolean;
 }) {
+
+  const index = allSuperBlocks.indexOf(superBlock);
+  const circleFill = currentCert >= index ? 'solid' : 'grey';
+  const arrowFill = currentCert > index ? 'solid-arrow' : 'grey-arrow';
+
   return (
     <li>
+      <div className='progress-icon'>
+        {currentCert > index ?
+          <div className='cert-icon-outline'>
+            <CertificationIcon fill='var(--secondary-background)' />
+          </div> :
+          <span className={`progress-number ${circleFill}`}>
+            {allSuperBlocks.indexOf(superBlock)}
+          </span>
+        }
+        {!last && <span className={`arrow ${arrowFill}`}>&#x2193;</span>}
+      </div>
+
       <Link className='btn link-btn btn-lg' to={`/learn/${superBlock}/`}>
         <div style={linkSpacingStyle}>
-          {generateIconComponent(superBlock, 'map-icon')}
           {getSuperBlockTitleForMap(superBlock)}
+          {generateIconComponent(superBlock, 'map-icon')}
         </div>
         {landing && <LinkButton />}
       </Link>
@@ -65,34 +115,98 @@ function renderLandingMap() {
 }
 
 function renderLearnMap(currentSuperBlock: MapProps['currentSuperBlock']) {
-  const tempAuditedSuperBlocks = getAuditedSuperBlocks({
-    language: curriculumLocale,
-    showNewCurriculum: showNewCurriculum.toString(),
-    showUpcomingChanges: showUpcomingChanges.toString()
-  });
-  const tempNotAuditedSuperBlocks = getNotAuditedSuperBlocks({
-    language: curriculumLocale,
-    showNewCurriculum: showNewCurriculum.toString(),
-    showUpcomingChanges: showUpcomingChanges.toString()
-  });
+  // const tempAuditedSuperBlocks = getAuditedSuperBlocks({
+  //   language: curriculumLocale,
+  //   showNewCurriculum: showNewCurriculum.toString(),
+  //   showUpcomingChanges: showUpcomingChanges.toString()
+  // });
+  // const tempNotAuditedSuperBlocks = getNotAuditedSuperBlocks({
+  //   language: curriculumLocale,
+  //   showNewCurriculum: showNewCurriculum.toString(),
+  //   showUpcomingChanges: showUpcomingChanges.toString()
+  // });
 
-  const auditedSuperBlocks = tempAuditedSuperBlocks.filter(
-    superBlock => superBlock !== currentSuperBlock
-  );
+  // const auditedSuperBlocks = tempAuditedSuperBlocks.filter(
+  //   superBlock => superBlock !== currentSuperBlock
+  // );
 
-  const notAuditedSuperBlocks = tempNotAuditedSuperBlocks.filter(
-    superBlock => superBlock !== currentSuperBlock
-  );
+  // const notAuditedSuperBlocks = tempNotAuditedSuperBlocks.filter(
+  //   superBlock => superBlock !== currentSuperBlock
+  // );
 
   return (
-    <ul data-test-label='learn-curriculum-map'>
+    <div className='map-wrap'>
       {/* audited superblocks */}
-      {auditedSuperBlocks.map((superBlock, i) => (
-        <MapLi key={i} superBlock={superBlock} landing={false} />
-      ))}
+      <Spacer size='medium' />
+
+      <div className='stage-wrap'>
+        <h2 className='stage-heading'>Stage 1: Front End Development</h2>
+        <Spacer size='small' />
+        <ul>
+          {stage1.map((superBlock, i) => (
+            <MapLi
+              key={i}
+              last={i + 1 === stage1.length}
+              superBlock={superBlock}
+              landing={false}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <Spacer size='medium' />
+
+      <div className='stage-wrap'>
+        <h2 className='stage-heading'>Stage 2: Back End Development</h2>
+        <Spacer size='small' />
+        <ul>
+          {stage2.map((superBlock, i) => (
+            <MapLi
+              key={i}
+              last={i + 1 === stage2.length}
+              superBlock={superBlock}
+              landing={false}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <Spacer size='medium' />
+
+      <div className='stage-wrap'>
+        <h2 className='stage-heading'>Stage 3: Python & AI</h2>
+        <Spacer size='small' />
+        <ul>
+          {stage3.map((superBlock, i) => (
+            <MapLi
+              key={i}
+              last={i + 1 === stage3.length}
+              superBlock={superBlock}
+              landing={false}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <Spacer size='medium' />
+
+      <div className='stage-wrap'>
+        <h2 className='stage-heading'>Stage 4: Extra</h2>
+        <Spacer size='small' />
+        <ul>
+          {stage4.map((superBlock, i) => (
+            <MapLi
+              key={i}
+              last={i + 1 === stage4.length}
+              superBlock={superBlock}
+              landing={false}
+            />
+          ))}
+        </ul>
+      </div>
 
       {/* has not audited superblocks */}
-      {notAuditedSuperBlocks.length > 0 && (
+      {/*notAuditedSuperBlocks.length > 0 && (
         <>
           {' '}
           <hr />
@@ -110,13 +224,13 @@ function renderLearnMap(currentSuperBlock: MapProps['currentSuperBlock']) {
             <Spacer size='medium' />
           </div>
         </>
-      )}
+      )*/}
 
       {/* not audited superblocks */}
-      {notAuditedSuperBlocks.map((superBlock, i) => (
+      {/*notAuditedSuperBlocks.map((superBlock, i) => (
         <MapLi key={i} superBlock={superBlock} landing={false} />
-      ))}
-    </ul>
+      ))*/}
+    </div>
   );
 }
 

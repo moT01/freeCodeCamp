@@ -1,6 +1,10 @@
 import React from 'react';
 
-function CertificationIcon(): JSX.Element {
+function CertificationIcon({
+  fill = 'var(--secondary-background)'
+}: {
+  fill?: string;
+}): JSX.Element {
   return (
     <svg
       height='248.21'
@@ -23,17 +27,13 @@ function CertificationIcon(): JSX.Element {
       </defs>
       <g>
         <g>
-          <use
-            fill='var(--primary-color)'
-            fillOpacity='0'
-            opacity='1'
-            xlinkHref='#aZt9D86Ps'
-          />
+          <use fill={fill} fillOpacity='0' opacity='1' xlinkHref='#aZt9D86Ps' />
           <g>
             <use
               fillOpacity='0'
               opacity='1'
-              stroke='var(--primary-color)'
+              stroke={fill}
+              fill={fill}
               strokeOpacity='1'
               strokeWidth='14'
               xlinkHref='#aZt9D86Ps'
@@ -42,7 +42,7 @@ function CertificationIcon(): JSX.Element {
         </g>
         <g>
           <use
-            fill='var(--primary-color)'
+            fill={fill}
             fillOpacity='0'
             opacity='1'
             xlinkHref='#b7LyrCUAE'
@@ -51,7 +51,8 @@ function CertificationIcon(): JSX.Element {
             <use
               fillOpacity='0'
               opacity='1'
-              stroke='var(--primary-color)'
+              stroke={fill}
+              fill={fill}
               strokeOpacity='1'
               strokeWidth='14'
               xlinkHref='#b7LyrCUAE'
