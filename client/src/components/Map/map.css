@@ -77,6 +77,10 @@
   color: var(--quaternary-background);
 }
 
+.map-ui ul li .map-icon {
+  align-self: flex-end;
+}
+
 @media (max-width: 640px) {
   .map-ui .block ul {
     padding-inline-start: 6px;

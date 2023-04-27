@@ -29,7 +29,8 @@ const linkSpacingStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  gap: '15px'
+  gap: '15px',
+  width: '100%'
 };
 
 const stage1 = [
@@ -60,6 +61,7 @@ const stage4 = [
 ];
 
 const allSuperBlocks = ['', ...stage1, ...stage2, ...stage3, ...stage4];
+const fullyCompleted = 1;
 const currentCert = 5;
 
 function MapLi({
@@ -71,22 +73,26 @@ function MapLi({
   landing: boolean;
   last?: boolean;
 }) {
-
   const index = allSuperBlocks.indexOf(superBlock);
   const circleFill = currentCert >= index ? 'solid' : 'grey';
   const arrowFill = currentCert > index ? 'solid-arrow' : 'grey-arrow';
+  const certIconFill =
+    fullyCompleted >= index
+      ? 'var(--yellow-gold)'
+      : 'var(--secondary-background)';
 
   return (
     <li>
       <div className='progress-icon'>
-        {currentCert > index ?
+        {currentCert > index ? (
           <div className='cert-icon-outline'>
-            <CertificationIcon fill='var(--secondary-background)' />
-          </div> :
+            <CertificationIcon fill={certIconFill} />
+          </div>
+        ) : (
           <span className={`progress-number ${circleFill}`}>
             {allSuperBlocks.indexOf(superBlock)}
           </span>
-        }
+        )}
         {!last && <span className={`arrow ${arrowFill}`}>&#x2193;</span>}
       </div>
 
