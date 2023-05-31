@@ -1,0 +1,27 @@
+{
+  "name": "Global Infrastructure, Networking and Content Delivery",
+  "isUpcomingChange": true,
+  "dashedName": "global-infrastructure-networking-and-content-delivery",
+  "order": 0,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "64398e719761f307d9a1a823",
+      "Introduction to Content Delivery Networks (CDNs)"
+    ],
+    [
+      "64398f2a9761f307d9a1a824",
+      "Akamai's Global Server Network and Edge Technology"
+    ],
+    [
+      "64398f369761f307d9a1a825",
+      "Understanding Akamai's Intelligent Platform"
+    ],
+    [
+      "643cde835f32668f6ceafbe1",
+      "Content Delivery Best Practices: Caching, Compression, and Prefetching"
+    ]
+  ]}

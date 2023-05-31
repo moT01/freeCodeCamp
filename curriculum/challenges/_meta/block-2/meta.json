@@ -1,0 +1,23 @@
+{
+  "name": "Block 2",
+  "isUpcomingChange": true,
+  "dashedName": "block-2",
+  "order": 0,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-engineer",
+  "challengeOrder": [
+    [
+      "643cc824bea1d07479d4e373",
+      "Step 1"
+    ],
+    [
+      "643cc82bbea1d07479d4e374",
+      "Step 2"
+    ],
+    [
+      "643cc833bea1d07479d4e375",
+      "Step 3"
+    ]
+  ]}

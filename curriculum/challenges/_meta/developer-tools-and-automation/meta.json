@@ -1,0 +1,23 @@
+{
+  "name": "Developer Tools and Automation",
+  "isUpcomingChange": true,
+  "dashedName": "developer-tools-and-automation",
+  "order": 4,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "643cd61a5f32668f6ceafbde",
+      "Overview of Akamai Developer Tools and APIs"
+    ],
+    [
+      "643ce1815f32668f6ceafbe6",
+      "Building and Testing Applications with Akamai Sandbox"
+    ],
+    [
+      "643ce1875f32668f6ceafbe7",
+      "Infrastructure as Code (IaC) with Akamai Terraform Provider"
+    ]
+  ]}

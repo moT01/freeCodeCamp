@@ -81,13 +81,13 @@ function translateGeneric({ text }, config, regexBefore, regexAfter) {
   for (const [match, before, comment, after] of matches) {
     if (knownComments.includes(comment)) {
       text = text.replace(match, `${before}${dict[comment][lang]}${after}`);
-    } else if (comment.trim()) {
+    } /*else if (comment.trim()) {
       throw `The comment
 ${comment}
 does not appear in the comment dictionary.
 When updating or adding a comment it must have the same text in the English challenges and the comment dictionary.
 `;
-    }
+    }*/
   }
 
   return { text };

@@ -1,0 +1,23 @@
+{
+  "name": "Security and Compliance",
+  "isUpcomingChange": true,
+  "dashedName": "security-and-compliance",
+  "order": 5,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "643cd6265f32668f6ceafbdf",
+      "Introduction to Akamai Security Solutions"
+    ],
+    [
+      "643ce2275f32668f6ceafbe8",
+      "DDoS Mitigation and Protection with Akamai"
+    ],
+    [
+      "643ce22d5f32668f6ceafbe9",
+      "Web Application Firewall (WAF) and Security Controls"
+    ]
+  ]}

@@ -1,0 +1,23 @@
+{
+  "name": "Compute",
+  "isUpcomingChange": true,
+  "dashedName": "compute",
+  "order": 1,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "64398f3f9761f307d9a1a826",
+      "Overview of Akamai Compute Services"
+    ],
+    [
+      "64398f4c9761f307d9a1a827",
+      "Serverless Computing with Akamai EdgeWorkers"
+    ],
+    [
+      "64398f539761f307d9a1a828",
+      "Building and Deploying Serverless Applications"
+    ]
+  ]}

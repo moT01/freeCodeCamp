@@ -1,0 +1,23 @@
+{
+  "name": "Support, Account, Billing, Pricing",
+  "isUpcomingChange": true,
+  "dashedName": "support-account-billing-pricing",
+  "order": 6,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "643cd6325f32668f6ceafbe0",
+      "Overview of Akamai Account Management and Support"
+    ],
+    [
+      "643ce2b25f32668f6ceafbea",
+      "Understanding Akamai's Billing and Pricing Models"
+    ],
+    [
+      "643ce2b95f32668f6ceafbeb",
+      "Troubleshooting and Resolving Issues with Akamai Support"
+    ]
+  ]}

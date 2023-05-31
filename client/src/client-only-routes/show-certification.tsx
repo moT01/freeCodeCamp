@@ -1,4 +1,9 @@
-import { Grid, Row, Col, Image, Button } from '@freecodecamp/react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  Image /*, Button*/
+} from '@freecodecamp/react-bootstrap';
 import { isEmpty } from 'lodash-es';
 import { QRCodeSVG } from 'qrcode.react';
 import React, { useEffect, useState } from 'react';
@@ -10,12 +15,13 @@ import { createSelector } from 'reselect';
 import envData from '../../../config/env.json';
 import { getLangCode } from '../../../config/i18n';
 import FreeCodeCampLogo from '../assets/icons/freecodecamp';
-import DonateForm from '../components/Donation/donate-form';
+import AkamaiLogo from '../assets/icons/akamai-logo';
+// import DonateForm from '../components/Donation/donate-form';
 
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
+import { Loader /*, Spacer*/ } from '../components/helpers';
 import RedirectHome from '../components/redirect-home';
-import { Themes } from '../components/settings/theme';
+// import { Themes } from '../components/settings/theme';
 import { showCert, executeGA, fetchProfileForUser } from '../redux/actions';
 import {
   showCertSelector,
@@ -31,8 +37,8 @@ import certificateMissingMessage from '../utils/certificate-missing-message';
 import reallyWeirdErrorMessage from '../utils/really-weird-error-message';
 import standardErrorMessage from '../utils/standard-error-message';
 
-import { PaymentContext } from '../../../config/donation-settings';
-import ShowProjectLinks from './show-project-links';
+// import { PaymentContext } from '../../../config/donation-settings';
+// import ShowProjectLinks from './show-project-links';
 
 const { clientLocale } = envData;
 
@@ -117,9 +123,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
   const { t } = useTranslation();
-  const [isDonationSubmitted, setIsDonationSubmitted] = useState(false);
+  // const [isDonationSubmitted, setIsDonationSubmitted] = useState(false);
   const [isDonationDisplayed, setIsDonationDisplayed] = useState(false);
-  const [isDonationClosed, setIsDonationClosed] = useState(false);
+  // const [isDonationClosed, setIsDonationClosed] = useState(false);
 
   useEffect(() => {
     const { username, certSlug, isValidCert, showCert } = props;
@@ -169,21 +175,21 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
     props.executeGA
   ]);
 
-  const hideDonationSection = () => {
+  /*const hideDonationSection = () => {
     setIsDonationDisplayed(false);
     setIsDonationClosed(true);
   };
 
   const handleProcessing = () => {
     setIsDonationSubmitted(true);
-  };
+  };*/
 
   const {
     cert,
     fetchState,
     isValidCert,
     createFlashMessage,
-    signedInUserName,
+    // signedInUserName,
     location: { pathname }
   } = props;
 
@@ -212,20 +218,20 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
     date,
     name: userFullName = null,
     username,
-    certTitle,
+    // certTitle,
     completionTime
   } = cert;
 
-  const { user } = props;
+  // const { user } = props;
 
   const displayName = userFullName ?? username;
 
   const certDate = new Date(date);
-  const certYear = certDate.getFullYear();
-  const certMonth = certDate.getMonth();
+  // const certYear = certDate.getFullYear();
+  // const certMonth = certDate.getMonth();
   const certURL = `https://freecodecamp.org${pathname}`;
 
-  const donationCloseBtn = (
+  /*const donationCloseBtn = (
     <div>
       <Button
         block={true}
@@ -297,80 +303,101 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
       </Col>
       <Spacer size='large' />
     </Row>
-  );
+  );*/
 
   return (
     <Grid className='certificate-outer-wrapper'>
-      {isDonationDisplayed && !isDonationClosed ? donationSection : ''}
+      {/*isDonationDisplayed && !isDonationClosed ? donationSection : ''*/}
       <Row className='certificate-wrapper certification-namespace'>
         <header>
-          <Col md={5} sm={12}>
-            <div className='logo'>
+          <Col md={6} sm={12}>
+            <div className='logo freecc-logo'>
               <FreeCodeCampLogo aria-hidden='true' />
             </div>
           </Col>
-          <Col md={7} sm={12}>
-            <div className='issue-date' data-cy='issue-date'>
-              {t('certification.issued')}&nbsp;
-              <strong>
-                {certDate.toLocaleString([localeCode, 'en-US'], {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </strong>
+          <Col md={6} sm={12}>
+            <div className='logo akamai-logo'>
+              <AkamaiLogo aria-hidden='true' />
             </div>
           </Col>
+          <div className='issue-date' data-cy='issue-date'>
+            {t('certification.issued')}&nbsp;
+            <strong>
+              {certDate.toLocaleString([localeCode, 'en-US'], {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </strong>
+          </div>
         </header>
 
         <main className='information'>
           <div className='information-container'>
-            <Trans i18nKey='certification.fulltext' title={certTitle}>
+            <Trans
+              i18nKey='certification.fulltext'
+              title='Akamai Cloud Practitioner'
+            >
               <h3>placeholder</h3>
               <h1>
                 <strong>{{ user: displayName }}</strong>
               </h1>
               <h3>placeholder</h3>
               <h1>
-                <strong>
-                  {{ title: t(`certification.title.${certTitle}`, certTitle) }}
-                </strong>
+                <strong>{{ title: 'Akamai Cloud Practitioner' }}</strong>
               </h1>
               <h4>{{ time: completionTime }}</h4>
             </Trans>
           </div>
         </main>
+
         <footer>
           <div className='row signatures'>
-            <Image
-              alt="Quincy Larson's Signature"
-              src={
-                'https://cdn.freecodecamp.org' +
-                '/platform/english/images/quincy-larson-signature.svg'
-              }
-            />
-            <p>
-              <strong>Quincy Larson</strong>
-            </p>
-            <p>{t('certification.executive')}</p>
+            <Col md={2}></Col>
+            <Col md={4} sm={12}>
+              <Image
+                alt="Quincy Larson's Signature"
+                src={
+                  'https://cdn.freecodecamp.org' +
+                  '/platform/english/images/quincy-larson-signature.svg'
+                }
+              />
+              <p>
+                <strong>Quincy Larson</strong>
+              </p>
+              <p>{t('certification.executive')}</p>
+            </Col>
+            <Col md={4} sm={12}>
+              <hr className='missing-signature' />
+              <p>
+                <strong>Frank Thomson Leighton</strong>
+              </p>
+              <p>CEO, Akamai Technologies</p>
+            </Col>
           </div>
+
           <span className='qr-wrap'>
             <QRCodeSVG className='qr-code' value={certURL} />
           </span>
           <Row>
             <p className='verify'>
-              {t('certification.verify', { certURL: certURL })}
+              Verify this certification at
+              <br />
+              {t('certification.verify', {
+                certURL:
+                  'https://freecodecamp.org/certification/developmentuser/akamai-cloud-practitioner'
+              })}
             </p>
           </Row>
         </footer>
       </Row>
-      <div className='row certificate-links'>
+      {/*<div className='row certificate-links'>
         <Spacer size='large' />
         {signedInUserName === username ? shareCertBtns : ''}
         <Spacer size='large' />
         <ShowProjectLinks certName={certTitle} name={displayName} user={user} />
         <Spacer size='large' />
-      </div>
+      </div>*/}
     </Grid>
   );
 };

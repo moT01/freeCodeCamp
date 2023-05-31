@@ -1,0 +1,31 @@
+{
+  "name": "Akamai Cloud Practitioner Certification Projects",
+  "isUpcomingChange": true,
+  "dashedName": "akamai-cloud-practitioner-certification-projects",
+  "order": 7,
+  "time": "150 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "64398f5d9761f307d9a1a829",
+      "understanding-akamais-billing-and-pricing-models"
+    ],
+    [
+      "64398f669761f307d9a1a82a",
+      "Creating and Deploying a Serverless Application with EdgeWorkers"
+    ],
+    [
+      "64398f6f9761f307d9a1a82b",
+      "Securing Your Web Application with Akamai's Web Application Firewall (WAF)"
+    ],
+    [
+      "643990059761f307d9a1a82d",
+      "Scaling Your Application with Akamai's NoSQL Database (EdgeKV)"
+    ],
+    [
+      "64398fff9761f307d9a1a82c",
+      "Configuring Infrastructure as Code with Akamai Terraform Provider"
+    ]
+  ]}
