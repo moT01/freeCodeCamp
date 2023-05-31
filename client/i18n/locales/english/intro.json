@@ -976,6 +976,90 @@
       }
     }
   },
+  "akamai-cloud-practitioner": {
+    "title": "Akamai Cloud Practitioner",
+    "intro": [
+      "This course covers Akamai's cloud infrastructure, networking, and content delivery solutions, as well as compute, storage, and database services.",
+      "You will also learn about developer tools, automation, security and compliance, and support and billing.",
+      "By completing this course, students will gain practical skills and knowledge to leverage Akamai's cloud services for building scalable and secure applications."
+    ],
+    "blocks": {
+      "global-infrastructure-networking-and-content-delivery": {
+        "title": "Global Infrastructure, Networking and Content Delivery",
+        "intro": [
+          "In this course, you will learn Akamai's global server network, edge technology, and intelligent platform, as well as content delivery best practices for optimizing user experience."
+        ]
+      },
+      "compute": {
+        "title": "Compute",
+        "intro": [
+          "In this course, you will explore Akamai's compute services, including serverless computing with EdgeWorkers, building and deploying serverless applications, and understanding compute options."
+        ]
+      },
+      "storage": {
+        "title": "Storage",
+        "intro": [
+          "In this course, you will learn Akamai's storage services, including choosing the right storage service for your use case, managing and accessing files with Akamai's file storage service, and understanding Akamai's storage options."
+        ]
+      },
+      "databases": {
+        "title": "Databases",
+        "intro": [
+          "In this course, you will explore Akamai's database services, including an introduction to Akamai's databases, understanding Akamai's NoSQL database (EdgeKV), and building and scaling applications with EdgeKV."
+        ]
+      },
+      "developer-tools-and-automation": {
+        "title": "Developer Tools and Automation",
+        "intro": [
+          "In this couse, you will learn Akamai's developer tools and automation options, including building and testing applications with Akamai Sandbox and using Akamai Terraform Provider for Infrastructure as Code (IaC)."
+        ]
+      },
+      "security-and-compliance": {
+        "title": "Security and Compliance",
+        "intro": [
+          "In this course, you will learn Akamai's security and compliance solutions, including DDoS mitigation and protection, Web Application Firewall (WAF), and other security controls."
+        ]
+      },
+      "support-account-billing-pricing": {
+        "title": "Support, Account, Billing, Pricing",
+        "intro": [
+          "This course provides an overview of Akamai's account management and support options, understanding billing and pricing models, and troubleshooting and resolving issues with Akamai support."
+        ]
+      },
+      "akamai-cloud-practitioner-certification-projects": {
+        "title": "Akamai Cloud Practitioner Certification Projects",
+        "intro": [
+          "Complete these certification projects to earn your Akamai Cloud Practitioner Certification"
+        ]
+      }
+    }
+  },
+  "akamai-cloud-engineer": {
+    "title": "Akamai Cloud Engineer",
+    "intro": [
+      "Akamai Cloud Engineer intro"
+    ],
+    "blocks": {
+      "block-1": {
+        "title": "Block 1",
+        "intro": [
+          "Block 1 intro"
+        ]
+      },
+      "block-2": {
+        "title": "Block 2",
+        "intro": [
+          "Block 2 intro"
+        ]
+      },
+      "akamai-cloud-engineer-certification-projects": {
+        "title": "Akamai Cloud Engineer Certification Projects",
+        "intro": [
+          "Certification Projects intro"
+        ]
+      }
+    }
+  },
   "misc-text": {
     "certification": "{{cert}} Certification",
     "browse-other": "Browse our other free certifications\n(we recommend doing these in order)",

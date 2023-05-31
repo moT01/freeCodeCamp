@@ -81,7 +81,9 @@ export const defaultSuperBlockOrder: SuperBlocks[] = [
   SuperBlocks.CollegeAlgebraPy,
   SuperBlocks.CodingInterviewPrep,
   SuperBlocks.ProjectEuler,
-  SuperBlocks.TheOdinProject
+  SuperBlocks.TheOdinProject,
+  SuperBlocks.AkamaiPractitioner,
+  SuperBlocks.AkamaiEngineer
 ];
 
 /*
@@ -109,7 +111,9 @@ export const superBlockOrder: SuperBlockOrder = {
       SuperBlocks.DataAnalysisPy,
       SuperBlocks.InfoSec,
       SuperBlocks.MachineLearningPy,
-      SuperBlocks.CollegeAlgebraPy
+      SuperBlocks.CollegeAlgebraPy,
+      SuperBlocks.AkamaiPractitioner,
+      SuperBlocks.AkamaiEngineer
     ],
     [CurriculumMaps.Learn]: {
       [TranslationStates.Audited]: {
@@ -132,7 +136,9 @@ export const superBlockOrder: SuperBlockOrder = {
         [SuperBlockStates.New]: [],
         [SuperBlockStates.Upcoming]: [
           SuperBlocks.JsAlgoDataStructNew,
-          SuperBlocks.TheOdinProject
+          SuperBlocks.TheOdinProject,
+          SuperBlocks.AkamaiPractitioner,
+          SuperBlocks.AkamaiEngineer
         ],
         [SuperBlockStates.Legacy]: [SuperBlocks.RespWebDesign]
       },

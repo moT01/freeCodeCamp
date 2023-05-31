@@ -10,11 +10,14 @@ import {
   DONATE_NAV_EXPOSED_WIDTH
 } from '../../../../../config/misc';
 import { User } from '../../../redux/prop-types';
+import FreeCodeCampLogo from '../../../assets/icons/freecodecamp';
+import AkamaiLogo from '../../../assets/icons/akamai-logo';
 import MenuButton from './menu-button';
 import NavLinks from './nav-links';
 import NavLogo from './nav-logo';
 import './universal-nav.css';
 import AuthOrProfile from './auth-or-profile';
+
 
 const SearchBar = Loadable(() => import('../../search/searchBar/search-bar'));
 const SearchBarOptimized = Loadable(
@@ -60,60 +63,14 @@ export const UniversalNav = ({
   return (
     <nav
       aria-label={t('aria.primary-nav')}
-      className={`universal-nav${displayMenu ? ' expand-nav' : ''}`}
+      className='universal-nav'
       id='universal-nav'
     >
-      <div
-        className={`universal-nav-left${displayMenu ? ' display-search' : ''}`}
-      >
-        <Media minWidth={SEARCH_EXPOSED_WIDTH + 1}>{search}</Media>
+      <div className='logo freecc-logo'>
+        <FreeCodeCampLogo aria-hidden='true' />
       </div>
-      <Link id='universal-nav-logo' to='/learn'>
-        <NavLogo />
-      </Link>
-      <div className='universal-nav-right main-nav'>
-        {pending ? (
-          <div className='nav-skeleton'>
-            <SkeletonSprite />
-          </div>
-        ) : (
-          <>
-            {!user?.isDonating && exposeDonateButton && (
-              <Media minWidth={DONATE_NAV_EXPOSED_WIDTH + 1}>
-                <Link
-                  sameTab={false}
-                  to='/donate'
-                  data-test-label='nav-donate-button'
-                  className='exposed-button-nav'
-                >
-                  {t('buttons.donate')}
-                </Link>
-              </Media>
-            )}
-            <MenuButton
-              displayMenu={displayMenu}
-              hideMenu={hideMenu}
-              innerRef={menuButtonRef}
-              showMenu={showMenu}
-              user={user}
-            />
-            <Media maxWidth={SEARCH_EXPOSED_WIDTH}>{search}</Media>
-            <NavLinks
-              displayMenu={displayMenu}
-              fetchState={fetchState}
-              isLanguageMenuDisplayed={isLanguageMenuDisplayed}
-              hideLanguageMenu={hideLanguageMenu}
-              hideMenu={hideMenu}
-              menuButtonRef={menuButtonRef}
-              showLanguageMenu={showLanguageMenu}
-              showMenu={showMenu}
-              user={user}
-            />
-            <div className='navatar'>
-              <AuthOrProfile user={user} />
-            </div>
-          </>
-        )}
+      <div className='logo akamai-logo'>
+        <AkamaiLogo aria-hidden='true' />
       </div>
     </nav>
   );

@@ -65,32 +65,55 @@
 .certification-namespace .logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 140px;
-  margin-inline-start: 100px;
+  /*margin-inline-start: 100px;*/
 }
 
 .certification-namespace .logo svg {
-  height: 100%;
-  width: 100%;
+  height: 70%;
+  width: 70%;
+  max-width: 500px;
+}
+
+.certification-namespace .freecc-logo svg {
+  position: relative;
+  top: 4px;
+}
+
+.certification-namespace .akamai-logo svg {
+  position: relative;
+  top: -4px;
+  height: 60%;
+  width: 60%;
   max-width: 500px;
 }
 
 .certification-namespace .issue-date {
-  line-height: 140px;
-  font-size: 20px;
+  width: 100%;
+  display: block;
   text-align: right;
-  margin-inline-end: 100px;
-  color: var(--gray-00);
+  position: absolute;
+  bottom: -30px;
+  font-size: 18px;
+  color: var(--primary-color);
+  right: 20px;
 }
 
 .certification-namespace .issue-date strong {
-  color: var(--gray-00);
+  color: var(--primary-color);
 }
 
 .certification-namespace .information {
   height: 380px;
   text-align: center;
   background-color: var(--gray-05);
+}
+
+.certification-namespace .partner-logo {
+  margin-top: 20px;
+  max-width: 200px;
+  height: auto;
 }
 
 .certification-namespace .information-container {
@@ -131,6 +154,15 @@
   margin: 0 auto;
 }
 
+.certification-namespace .missing-signature {
+  height: 2px;
+  border-color: black;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 97px;
+  margin-bottom: 15px;
+}
+
 .certification-namespace .signatures p {
   font-size: 18px;
   padding-top: 10px;
@@ -157,10 +189,10 @@
 
 .qr-code {
   position: absolute;
-  width: 128px;
-  height: 128px;
-  top: -128px;
-  right: 60px;
+  width: 96px;
+  height: 96px;
+  top: 0px;
+  right: 20px;
 }
 
 /*mobile media queries*/

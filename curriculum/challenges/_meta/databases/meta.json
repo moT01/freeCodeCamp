@@ -1,0 +1,23 @@
+{
+  "name": "Databases",
+  "isUpcomingChange": true,
+  "dashedName": "databases",
+  "order": 3,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "643cd60a5f32668f6ceafbdd",
+      "Introduction to Akamai Databases"
+    ],
+    [
+      "643ce0aa5f32668f6ceafbe4",
+      "Understanding Akamai's NoSQL Database: EdgeKV"
+    ],
+    [
+      "643ce0ae5f32668f6ceafbe5",
+      "Building and Scaling Applications with EdgeKV"
+    ]
+  ]}

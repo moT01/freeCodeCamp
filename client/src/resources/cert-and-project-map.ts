@@ -26,6 +26,8 @@ const dataAnalysisPyBase =
 const machineLearningPyBase =
   '/learn/machine-learning-with-python/machine-learning-with-python-projects';
 const collegeAlgebraPyBase = '/learn/college-algebra-with-python';
+const akamaiPractitionerBase = '/learn/akamai-cloud-practitioner';
+const akamaiEngineerBase = '/learn/akamai-cloud-engineer';
 const takeHomeBase = '/learn/coding-interview-prep/take-home-projects';
 const legacyFrontEndBase = feLibsBase;
 const legacyFrontEndResponsiveBase = responsiveWebBase;
@@ -750,6 +752,82 @@ const certMap = [
         title: 'Build a Data Graph Explorer',
         link: getCollegeAlgebraPyPath('build-a-data-graph-explorer'),
         certSlug: 'college-algebra-with-python-v8'
+      }
+    ]
+  },
+  {
+    id: '643995949761f307d9a1a82e',
+    title: 'Akamai Cloud Practitioner',
+    certSlug: 'akamai-cloud-practitioner-v8',
+    flag: 'isAkamaiPractitionerCertV8',
+    projects: [
+      {
+        id: '64398f5d9761f307d9a1a829',
+        title: 'Building a High-Performance Website with Akamai',
+        link: `${akamaiPractitionerBase}/building-a-high-performance-website-with-akamai`,
+        certSlug: 'akamai-cloud-practitioner-v8'
+      },
+      {
+        id: '64398f669761f307d9a1a82a',
+        title: 'Creating and Deploying a Serverless Application with EdgeWorkers',
+        link: `${akamaiPractitionerBase}/creating-and-deploying-a-serverless-application-with-edgeworkers`,
+        certSlug: 'akamai-cloud-practitioner-v8'
+      },
+      {
+        id: '64398f6f9761f307d9a1a82b',
+        title: "Securing Your Web Application with Akamai's Web Application Firewall (WAF)",
+        link: `${akamaiPractitionerBase}/securing-your-web-application-with-akamais-web-application-firewall-waf`,
+        certSlug: 'akamai-cloud-practitioner-v8'
+      },
+      {
+        id: '643990059761f307d9a1a82d',
+        title: "Scaling Your Application with Akamai's NoSQL Database (EdgeKV)",
+        link: `${akamaiPractitionerBase}/scaling-your-application-with-akamais-nosql-database-edgekv`,
+        certSlug: 'akamai-cloud-practitioner-v8'
+      },
+      {
+        id: '64398fff9761f307d9a1a82c',
+        title: 'Configuring Infrastructure as Code with Akamai Terraform Provider',
+        link: `${akamaiPractitionerBase}/configuring-infrastructure-as-code-with-akamai-terraform-provider`,
+        certSlug: 'akamai-cloud-practitioner-v8'
+      }
+    ]
+  },
+  {
+    id: '643cc594bea1d07479d4e36a',
+    title: 'Akamai Cloud Engineer',
+    certSlug: 'akamai-cloud-engineer-v8',
+    flag: 'isAkamaiEngineerCertV8',
+    projects: [
+      {
+        id: '643cc59cbea1d07479d4e36b',
+        title: 'Project 1',
+        link: `${akamaiEngineerBase}/project-1`,
+        certSlug: 'akamai-cloud-engineer-v8'
+      },
+      {
+        id: '643cc5a4bea1d07479d4e36c',
+        title: 'Project 2',
+        link: `${akamaiEngineerBase}/project-2`,
+        certSlug: 'akamai-cloud-engineer-v8'
+      },
+      {
+        id: '643cc5a9bea1d07479d4e36d',
+        title: 'Project 3',
+        link: `${akamaiEngineerBase}/project-3`,
+        certSlug: 'akamai-cloud-engineer-v8'
+      },
+      {
+        id: '643cc5b0bea1d07479d4e36e',
+        title: 'Project 4',
+        link: `${akamaiEngineerBase}/project-4`,
+        certSlug: 'akamai-cloud-engineer-v8'
+      },
+      {
+        id: '643cc5b5bea1d07479d4e36f',
+        title: 'Project 5',
+        link: `${akamaiEngineerBase}/project-5`,
+        certSlug: 'akamai-cloud-engineer-v8'
       }
     ]
   }

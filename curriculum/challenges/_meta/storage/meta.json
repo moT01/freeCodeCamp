@@ -1,0 +1,23 @@
+{
+  "name": "Storage",
+  "isUpcomingChange": true,
+  "dashedName": "storage",
+  "order": 2,
+  "time": "5 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-practitioner",
+  "challengeOrder": [
+    [
+      "643cd5fd5f32668f6ceafbdc",
+      "Overview of Akamai Storage Services"
+    ],
+    [
+      "643ce0365f32668f6ceafbe2",
+      "Choosing the Right Storage Service for Your Use Case"
+    ],
+    [
+      "643ce03c5f32668f6ceafbe3",
+      "Akamai's File Storage Service: Managing and Accessing Files"
+    ]
+  ]}

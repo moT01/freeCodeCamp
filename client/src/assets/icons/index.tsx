@@ -15,6 +15,7 @@ import Shield from './shield';
 import VikingHelmet from './viking-helmet';
 import Graduation from './graduation';
 import CollegeAlgebra from './college-algebra';
+import Akamai from './akamai';
 
 const iconMap = {
   [SuperBlocks.RespWebDesignNew]: ResponsiveDesign,
@@ -33,7 +34,9 @@ const iconMap = {
   [SuperBlocks.CodingInterviewPrep]: Algorithm,
   [SuperBlocks.TheOdinProject]: VikingHelmet,
   [SuperBlocks.ProjectEuler]: Graduation,
-  [SuperBlocks.CollegeAlgebraPy]: CollegeAlgebra
+  [SuperBlocks.CollegeAlgebraPy]: CollegeAlgebra,
+  [SuperBlocks.AkamaiPractitioner]: Akamai,
+  [SuperBlocks.AkamaiEngineer]: Akamai,
 };
 
 const generateIconComponent = (

@@ -1,0 +1,31 @@
+{
+  "name": "Akamai Cloud Engineer Certification Projects",
+  "isUpcomingChange": true,
+  "dashedName": "akamai-cloud-engineer-certification-projects",
+  "order": 2,
+  "time": "150 hours",
+  "template": "",
+  "required": [],
+  "superBlock": "akamai-cloud-engineer",
+  "challengeOrder": [
+    [
+      "643cc59cbea1d07479d4e36b",
+      "Project 1"
+    ],
+    [
+      "643cc5a4bea1d07479d4e36c",
+      "Project 2"
+    ],
+    [
+      "643cc5a9bea1d07479d4e36d",
+      "Project 3"
+    ],
+    [
+      "643cc5b0bea1d07479d4e36e",
+      "Project 4"
+    ],
+    [
+      "643cc5b5bea1d07479d4e36f",
+      "Project 5"
+    ]
+  ]}
