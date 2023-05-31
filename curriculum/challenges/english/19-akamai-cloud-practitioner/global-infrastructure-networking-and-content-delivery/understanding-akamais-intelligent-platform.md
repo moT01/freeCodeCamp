@@ -1,6 +1,6 @@
 ---
 id: 64398f369761f307d9a1a825
-title: Understanding Akamai's Intelligent Platform
+title: Basic Input and Output Operations in C#
 challengeType: 11
 videoId: nLDychdBwUg
 dashedName: understanding-akamais-intelligent-platform

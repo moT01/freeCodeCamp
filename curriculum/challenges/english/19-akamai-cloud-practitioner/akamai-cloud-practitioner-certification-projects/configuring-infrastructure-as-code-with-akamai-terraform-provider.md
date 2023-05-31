@@ -1,6 +1,6 @@
 ---
 id: 64398fff9761f307d9a1a82c
-title: Configuring Infrastructure as Code with Akamai Terraform Provider
+title: Click Here to Start the Exam
 challengeType: 10
 dashedName: configuring-infrastructure-as-code-with-akamai-terraform-provider
 ---

@@ -16,6 +16,7 @@ import envData from '../../../config/env.json';
 import { getLangCode } from '../../../config/i18n';
 import FreeCodeCampLogo from '../assets/icons/freecodecamp';
 import AkamaiLogo from '../assets/icons/akamai-logo';
+import MicrosoftLogo from '../assets/icons/microsoft-logo';
 // import DonateForm from '../components/Donation/donate-form';
 
 import { createFlashMessage } from '../components/Flash/redux';
@@ -317,7 +318,7 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
           </Col>
           <Col md={6} sm={12}>
             <div className='logo akamai-logo'>
-              <AkamaiLogo aria-hidden='true' />
+              <MicrosoftLogo aria-hidden='true' />
             </div>
           </Col>
           <div className='issue-date' data-cy='issue-date'>
@@ -336,7 +337,7 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
           <div className='information-container'>
             <Trans
               i18nKey='certification.fulltext'
-              title='Akamai Cloud Practitioner'
+              title='Foundational C# with Microsoft'
             >
               <h3>placeholder</h3>
               <h1>
@@ -344,7 +345,7 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
               </h1>
               <h3>placeholder</h3>
               <h1>
-                <strong>{{ title: 'Akamai Cloud Practitioner' }}</strong>
+                <strong>{{ title: 'Foundational C# with Microsoft' }}</strong>
               </h1>
               <h4>{{ time: completionTime }}</h4>
             </Trans>
@@ -370,9 +371,9 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
             <Col md={4} sm={12}>
               <hr className='missing-signature' />
               <p>
-                <strong>Frank Thomson Leighton</strong>
+                <strong>Satya Nadella</strong>
               </p>
-              <p>CEO, Akamai Technologies</p>
+              <p>Chief Executive Officer, Microsoft</p>
             </Col>
           </div>
 
@@ -385,7 +386,7 @@ const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
               <br />
               {t('certification.verify', {
                 certURL:
-                  'https://freecodecamp.org/certification/developmentuser/akamai-cloud-practitioner'
+                  'https://freecodecamp.org/certification/developmentuser/foundational-csharp-with-microsoft'
               })}
             </p>
           </Row>

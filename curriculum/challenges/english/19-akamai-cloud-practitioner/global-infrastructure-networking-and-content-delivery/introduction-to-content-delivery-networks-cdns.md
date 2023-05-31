@@ -1,6 +1,6 @@
 ---
 id: 64398e719761f307d9a1a823
-title: Introduction to Content Delivery Networks (CDNs)
+title: Understanding C# Syntax and Structure
 challengeType: 11
 videoId: nLDychdBwUg
 dashedName: introduction-to-content-delivery-networks-cdns

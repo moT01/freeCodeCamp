@@ -77,13 +77,13 @@
 }
 
 .certification-namespace .freecc-logo svg {
-  position: relative;
-  top: 4px;
+  /* position: relative;
+  top: 4px; */
 }
 
 .certification-namespace .akamai-logo svg {
-  position: relative;
-  top: -4px;
+  /* position: relative;
+  top: -4px; */
   height: 60%;
   width: 60%;
   max-width: 500px;

@@ -977,47 +977,47 @@
     }
   },
   "akamai-cloud-practitioner": {
-    "title": "Foundational C# with Microsoft Certification",
+    "title": "Foundational C# with Microsoft",
     "intro": [
-      "This course covers Akamai's cloud infrastructure, networking, and content delivery solutions, as well as compute, storage, and database services.",
-      "You will also learn about developer tools, automation, security and compliance, and support and billing.",
-      "By completing this course, students will gain practical skills and knowledge to leverage Akamai's cloud services for building scalable and secure applications."
+      "This course offers a comprehensive introduction to C# programming, covering its core concepts, syntax, and practical application in software development.",
+      "Through hands-on exercises and projects, you will learn the fundamentals of C#, including variables, data types, control structures, and object-oriented programming principles.",
+      "By the end of this course, you will have gained the practical skills and knowledge needed to confidently leverage C# for building robust and scalable applications"
     ],
     "blocks": {
       "global-infrastructure-networking-and-content-delivery": {
-        "title": "Global Infrastructure, Networking and Content Delivery",
+        "title": "Write your first code using C#",
         "intro": [
-          "In this course, you will learn Akamai's global server network, edge technology, and intelligent platform, as well as content delivery best practices for optimizing user experience."
+          "Begin your C# journey by learning to write your first code using C#. Develop a strong foundation as you explore the fundamentals and syntax of the language, setting the stage for your programming adventures."
         ]
       },
       "compute": {
-        "title": "Compute",
+        "title": "Create and run simple C# console applications",
         "intro": [
-          "In this course, you will explore Akamai's compute services, including serverless computing with EdgeWorkers, building and deploying serverless applications, and understanding compute options."
+          "Master the art of creating and running simple C# console applications. Dive into the world of console-based programming, where you will gain hands-on experience executing your code and seeing it in action."
         ]
       },
       "storage": {
-        "title": "Storage",
+        "title": "Add logic to C# console applications",
         "intro": [
-          "In this course, you will learn Akamai's storage services, including choosing the right storage service for your use case, managing and accessing files with Akamai's file storage service, and understanding Akamai's storage options."
+          "Unlock the power of logic in C# console applications. Learn how to add logic and decision-making capabilities to your code, enabling your applications to make dynamic choices and respond intelligently to different scenarios."
         ]
       },
       "databases": {
-        "title": "Databases",
+        "title": "Work with variable data in C# console applications",
         "intro": [
-          "In this course, you will explore Akamai's database services, including an introduction to Akamai's databases, understanding Akamai's NoSQL database (EdgeKV), and building and scaling applications with EdgeKV."
+          "Discover the versatility of variable data in C# console applications. Harness the ability to store and manipulate different types of data, such as numbers and text, as you delve into the essential concepts of variables and data handling."
         ]
       },
       "developer-tools-and-automation": {
-        "title": "Developer Tools and Automation",
+        "title": "Create methods in C# console applications",
         "intro": [
-          "In this couse, you will learn Akamai's developer tools and automation options, including building and testing applications with Akamai Sandbox and using Akamai Terraform Provider for Infrastructure as Code (IaC)."
+          "Take your C# console applications to the next level by mastering the art of creating methods. Learn how to organize and modularize your code, making it more manageable, reusable, and efficient."
         ]
       },
       "security-and-compliance": {
-        "title": "Security and Compliance",
+        "title": "Debug C# console applications",
         "intro": [
-          "In this course, you will learn Akamai's security and compliance solutions, including DDoS mitigation and protection, Web Application Firewall (WAF), and other security controls."
+          "Sharpen your troubleshooting skills as you dive into the world of debugging C# console applications. Gain the ability to identify and fix issues in your code, ensuring your applications run smoothly and deliver the desired results."
         ]
       },
       "support-account-billing-pricing": {
@@ -1027,15 +1027,15 @@
         ]
       },
       "akamai-cloud-practitioner-certification-projects": {
-        "title": "Akamai Cloud Practitioner Certification Projects",
+        "title": "Foundational C# with Microsoft Certification Exam",
         "intro": [
-          "Complete these certification projects to earn your Akamai Cloud Practitioner Certification"
+          "Pass this exam to earn your Foundational C# with Microsoft Certification"
         ]
       }
     }
   },
   "akamai-cloud-engineer": {
-    "title": "Backend APIs with .NET Microsoft Certification",
+    "title": "Backend APIs with .NET Microsoft",
     "intro": [
       "Akamai Cloud Engineer intro"
     ],
