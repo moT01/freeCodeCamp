@@ -1,4 +1,4 @@
-.universal-nav {
+/* .universal-nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -13,6 +13,43 @@
   top: 0;
   --search-box-form: 38px;
   --lang-menu-height: 22.5rem;
+} */
+
+.universal-nav {
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+  height: 100px;
+  background: var(--theme-color);
+  position: fixed;
+  z-index: 1000;
+  color: var(--gray-00);
+  width: 100%;
+  top: 0;
+}
+
+.universal-nav .logo {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  /*margin-inline-start: 100px;*/
+}
+
+.universal-nav .logo svg {
+  max-width: 50%;
+}
+
+.universal-nav .freecc-logo svg {
+  height: 70%;
+  width: 70%;
+}
+
+.universal-nav .akamai-logo svg {
+  height: 70%;
+  width: 70%;
+  max-width: 500px;
 }
 
 .universal-nav a {

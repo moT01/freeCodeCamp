@@ -9,6 +9,8 @@ import {
   SEARCH_EXPOSED_WIDTH,
   DONATE_NAV_EXPOSED_WIDTH
 } from '../../../../../config/misc';
+import FreeCodeCampLogo from '../../../assets/icons/freecodecamp';
+import MicrosoftLogo from '../../../assets/icons/microsoft-logo';
 import MenuButton from './menu-button';
 import NavLinks, { type NavLinksProps } from './nav-links';
 import NavLogo from './nav-logo';
@@ -52,63 +54,77 @@ const UniversalNav = ({
   return (
     <nav
       aria-label={t('aria.primary-nav')}
-      className={`universal-nav${displayMenu ? ' expand-nav' : ''}`}
+      className='universal-nav'
       id='universal-nav'
     >
-      <Media minWidth={SEARCH_EXPOSED_WIDTH + 1}>
-        <div
-          className={`universal-nav-left${
-            displayMenu ? ' display-search' : ''
-          }`}
-        >
-          {search}
-        </div>
-      </Media>
-      <Link id='universal-nav-logo' to='/learn'>
-        <NavLogo />
-      </Link>
-      <div className='universal-nav-right main-nav'>
-        {pending ? (
-          <div className='nav-skeleton'>
-            <SkeletonSprite />
-          </div>
-        ) : (
-          <>
-            {!user?.isDonating && exposeDonateButton && (
-              <Media minWidth={DONATE_NAV_EXPOSED_WIDTH + 1}>
-                <Link
-                  sameTab={false}
-                  to='/donate'
-                  data-test-label='nav-donate-button'
-                  className='exposed-button-nav'
-                >
-                  {t('buttons.donate')}
-                </Link>
-              </Media>
-            )}
-            <LanguageList />
-            <MenuButton
-              displayMenu={displayMenu}
-              hideMenu={hideMenu}
-              innerRef={menuButtonRef}
-              showMenu={showMenu}
-              user={user}
-            />
-            <Media maxWidth={SEARCH_EXPOSED_WIDTH}>{search}</Media>
-            <NavLinks
-              displayMenu={displayMenu}
-              hideMenu={hideMenu}
-              menuButtonRef={menuButtonRef}
-              showMenu={showMenu}
-              user={user}
-            />
-            <div className='navatar'>
-              <AuthOrProfile user={user} />
-            </div>
-          </>
-        )}
+      <div className='logo freecc-logo'>
+        <FreeCodeCampLogo aria-hidden='true' />
+      </div>
+      <div className='logo akamai-logo'>
+        <MicrosoftLogo aria-hidden='true' />
       </div>
     </nav>
+
+
+    // <nav
+    //   aria-label={t('aria.primary-nav')}
+    //   className={`universal-nav${displayMenu ? ' expand-nav' : ''}`}
+    //   id='universal-nav'
+    // >
+    //   <Media minWidth={SEARCH_EXPOSED_WIDTH + 1}>
+    //     <div
+    //       className={`universal-nav-left${
+    //         displayMenu ? ' display-search' : ''
+    //       }`}
+    //     >
+    //       {search}
+    //     </div>
+    //   </Media>
+    //   <Link id='universal-nav-logo' to='/learn'>
+    //     <NavLogo />
+    //   </Link>
+    //   <div className='universal-nav-right main-nav'>
+    //     {pending ? (
+    //       <div className='nav-skeleton'>
+    //         <SkeletonSprite />
+    //       </div>
+    //     ) : (
+    //       <>
+    //         {!user?.isDonating && exposeDonateButton && (
+    //           <Media minWidth={DONATE_NAV_EXPOSED_WIDTH + 1}>
+    //             <Link
+    //               sameTab={false}
+    //               to='/donate'
+    //               data-test-label='nav-donate-button'
+    //               className='exposed-button-nav'
+    //             >
+    //               {t('buttons.donate')}
+    //             </Link>
+    //           </Media>
+    //         )}
+    //         <LanguageList />
+    //         <MenuButton
+    //           displayMenu={displayMenu}
+    //           hideMenu={hideMenu}
+    //           innerRef={menuButtonRef}
+    //           showMenu={showMenu}
+    //           user={user}
+    //         />
+    //         <Media maxWidth={SEARCH_EXPOSED_WIDTH}>{search}</Media>
+    //         <NavLinks
+    //           displayMenu={displayMenu}
+    //           hideMenu={hideMenu}
+    //           menuButtonRef={menuButtonRef}
+    //           showMenu={showMenu}
+    //           user={user}
+    //         />
+    //         <div className='navatar'>
+    //           <AuthOrProfile user={user} />
+    //         </div>
+    //       </>
+    //     )}
+    //   </div>
+    // </nav>
   );
 };
 

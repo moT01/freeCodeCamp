@@ -138,45 +138,390 @@ interface ExamResults {
 
 const examInDatabase = [
   {
-    question: 'Which of the following is a programming language?',
-    wrongAnswers: ['Apple', 'Orange', 'Banana', 'Mango'],
-    correctAnswer: 'Python'
+    question: 'What does C# stand for?',
+    wrongAnswers: ['Computer Science', 'C Shell', 'C Style', 'C Syntax'],
+    correctAnswer: 'C Sharp'
   },
   {
-    question: 'What does CSS stand for?',
-    wrongAnswers: [
-      'Computer Style Sheets',
-      'Complete Style Sheets',
-      'Cool Style Sheets',
-      'Creative Style Sheets'
-    ],
-    correctAnswer: 'Cascading Style Sheets'
+    question: 'Which company developed C#?',
+    wrongAnswers: ['Apple', 'Google', 'Amazon'],
+    correctAnswer: 'Microsoft'
   },
   {
-    question: 'What is the extension for a JavaScript file?',
-    wrongAnswers: ['.txt', '.doc', '.html', '.css'],
-    correctAnswer: '.js'
+    question: 'What is the latest version of C# as of 2023?',
+    wrongAnswers: ['C# 6.0', 'C# 7.0', 'C# 8.0', 'C# 9.0'],
+    correctAnswer: 'C# 10.0'
   },
   {
-    question: 'What is the purpose of the "if" statement in programming?',
+    question: 'Which programming paradigm does C# primarily support?',
+    wrongAnswers: ['Imperative', 'Functional', 'Procedural', 'Logical'],
+    correctAnswer: 'Object-oriented'
+  },
+  {
+    question: 'What is the default access modifier for members of a class in C#?',
+    wrongAnswers: ['public', 'internal', 'protected'],
+    correctAnswer: 'private'
+  },
+  {
+    question: 'Which tool is used to compile C# code?',
+    wrongAnswers: ['Java Compiler', 'Ruby Interpreter', 'C++ Compiler', 'Python Interpreter'],
+    correctAnswer: 'C# Compiler'
+  },
+  {
+    question: 'What is the file extension for a C# source code file?',
+    wrongAnswers: ['.cpp', '.java', '.cshtml', '.txt'],
+    correctAnswer: '.cs'
+  },
+  {
+    question: 'Which keyword is used to define a class in C#?',
+    wrongAnswers: ['function', 'type', 'struct'],
+    correctAnswer: 'class'
+  },
+  {
+    question: 'Which of the following is NOT a C# primitive data type?',
+    wrongAnswers: ['int', 'float', 'char', 'string'],
+    correctAnswer: 'double'
+  },
+  {
+    question: 'What does the "using" keyword do in C#?',
+    wrongAnswers: ['Imports a namespace', 'Defines a variable', 'Creates a loop', 'Declares a function'],
+    correctAnswer: 'Manages resources and implements IDisposable'
+  },
+  {
+    question: 'Which C# operator is used to access a member of an object?',
+    wrongAnswers: ['-', '*', '=', '%'],
+    correctAnswer: '.'
+  },
+  {
+    question: 'What is the purpose of the "foreach" loop in C#?',
     wrongAnswers: [
       'To repeat a set of instructions',
+      'To check a condition',
       'To define a function',
-      'To assign a value to a variable',
-      'To declare a loop'
+      'To assign a value to a variable'
     ],
-    correctAnswer: 'To check a condition'
+    correctAnswer: 'To iterate over elements in a collection'
   },
   {
-    question:
-      'What is the symbol used to represent addition in most programming languages?',
-    wrongAnswers: ['-', '*', '=', '%'],
-    correctAnswer: '+'
+    question: 'Which attribute is used to specify the entry point of a C# program?',
+    wrongAnswers: ['[Main]', '[EntryPoint]', '[Start]', '[Begin]'],
+    correctAnswer: '[STAThread]'
   },
   {
-    question: 'Which of the following is NOT a programming language?',
-    wrongAnswers: ['Java', 'Ruby', 'Swift', 'PHP'],
-    correctAnswer: 'Spanish'
+    question: 'What is the keyword used to create an instance of a class in C#?',
+    wrongAnswers: ['this', 'instance', 'create'],
+    correctAnswer: 'new'
+  },
+  {
+    question: 'Which exception is thrown when a null reference is encountered in C#?',
+    wrongAnswers: ['DivideByZeroException', 'FileNotFoundException', 'FormatException', 'IndexOutOfRangeException'],
+    correctAnswer: 'NullReferenceException'
+  },
+  {
+    question: 'Which C# feature allows a class to inherit from multiple base classes?',
+    wrongAnswers: ['Polymorphism', 'Abstraction', 'Encapsulation', 'Multiple Inheritance'],
+    correctAnswer: 'Interface'
+  },
+  {
+    question: 'What is the purpose of the "async" and "await" keywords in C#?',
+    wrongAnswers: [
+      'To handle exceptions',
+      'To define a delegate',
+      'To create a thread',
+      'To access a database'
+    ],
+    correctAnswer: 'To enable asynchronous programming'
+  },
+  {
+    question: 'Which attribute is used to mark a method as obsolete in C#?',
+    wrongAnswers: ['[Deprecated]', '[Removed]', '[NotUsed]'],
+    correctAnswer: '[Obsolete]'
+  },
+  {
+    question: 'Which feature was introduced in C# 9.0 that allows for pattern matching in switch statements?',
+    wrongAnswers: ['Tuples', 'Records', 'Deconstruction', 'Switch expressions'],
+    correctAnswer: 'Pattern matching'
+  },
+  {
+    question: 'What is the purpose of the StringBuilder class in C#?',
+    wrongAnswers: [
+      'To manipulate files',
+      'To perform mathematical calculations',
+      'To create graphical user interfaces',
+      'To generate random numbers'
+    ],
+    correctAnswer: 'To efficiently manipulate strings'
+  },
+  {
+    question: 'What is the purpose of the "finally" block in a try-catch-finally statement in C#?',
+    wrongAnswers: [
+      'To define a variable',
+      'To handle exceptions',
+      'To create an object',
+      'To initialize an array'
+    ],
+    correctAnswer: 'To ensure code execution regardless of exceptions'
+  },
+  {
+    question: 'Which C# feature allows you to define a method with the same name but different parameters?',
+    wrongAnswers: ['Overloading', 'Inheritance', 'Polymorphism', 'Abstraction'],
+    correctAnswer: 'Method overloading'
+  },
+  {
+    question: 'What is the purpose of the "sealed" keyword in C#?',
+    wrongAnswers: ['To prevent memory leaks', 'To optimize performance', 'To define a constant'],
+    correctAnswer: 'To restrict inheritance'
+  },
+  {
+    question: 'Which C# operator is used to perform explicit type conversion?',
+    wrongAnswers: ['as', 'is', 'typeof', 'convert'],
+    correctAnswer: 'cast'
+  },
+  {
+    question: 'What does the "ref" keyword do in C#?',
+    wrongAnswers: ['Declares a variable', 'Assigns a value', 'Defines a loop', 'Calls a method'],
+    correctAnswer: 'Passes a variable by reference'
+  },
+  {
+    question: 'Which collection type in C# ensures uniqueness of its elements?',
+    wrongAnswers: ['List', 'Array', 'Dictionary', 'Stack'],
+    correctAnswer: 'Set'
+  },
+  {
+    question: 'What is the purpose of the "lock" statement in C#?',
+    wrongAnswers: ['To define a class', 'To declare a variable', 'To perform arithmetic operations'],
+    correctAnswer: 'To synchronize access to a resource'
+  },
+  {
+    question: 'What is the difference between the "readonly" and "const" keywords in C#?',
+    wrongAnswers: [
+      'There is no difference, they can be used interchangeably',
+      'readonly is used for value types, const is used for reference types',
+      'readonly can only be used in classes, const can be used in structs',
+      'const can be assigned a value at runtime, readonly can only be assigned at compile-time'
+    ],
+    correctAnswer: 'readonly can be assigned a value at runtime, const can only be assigned at compile-time'
+  },
+  {
+    question: 'Which C# keyword is used to prevent a class from being inherited?',
+    wrongAnswers: ['final', 'static', 'const'],
+    correctAnswer: 'sealed'
+  },
+  {
+    question: 'What is the purpose of the "yield" keyword in C#?',
+    wrongAnswers: [
+      'To exit a loop',
+      'To break out of a switch statement',
+      'To throw an exception'
+    ],
+    correctAnswer: 'To generate a sequence of values lazily'
+  },
+  {
+    question: 'What does the "using" directive do in C#?',
+    wrongAnswers: ['Defines a class', 'Creates an object', 'Calls a method'],
+    correctAnswer: 'Imports a namespace'
+  },
+  {
+    question: 'Which C# operator is used for null conditional access?',
+    wrongAnswers: ['*', '#', '.'],
+    correctAnswer: '?.'
+  },
+  {
+    question: 'What is the purpose of the "out" keyword in C#?',
+    wrongAnswers: ['Declares a constant', 'Defines a method', 'Assigns a value'],
+    correctAnswer: 'Returns multiple values'
+  },
+  {
+    question: 'Which C# attribute is used to control the serialization process?',
+    wrongAnswers: ['[Serializable]', '[XmlIgnore]', '[JsonIgnore]'],
+    correctAnswer: '[DataContract]'
+  },
+  {
+    question: 'What is the purpose of the "nameof" operator in C#?',
+    wrongAnswers: [
+      'To retrieve the current date and time',
+      'To concatenate strings',
+      'To convert data types',
+      'To calculate mathematical expressions'
+    ],
+    correctAnswer: 'To obtain the name of a variable, type, or member'
+  },
+  {
+    question: 'Which C# feature is used to create lightweight thread-like units of work?',
+    wrongAnswers: ['Threads', 'Tasks', 'Processes', 'Events'],
+    correctAnswer: 'Async/await'
+  },
+  {
+    question: 'What is the purpose of the "params" keyword in C#?',
+    wrongAnswers: ['To define a variable', 'To access an array', 'To handle exceptions', 'To create a delegate'],
+    correctAnswer: 'To accept a variable number of arguments'
+  },
+  {
+    question: 'Which C# operator is used for null-coalescing?',
+    wrongAnswers: ['+', '||', '*', '&'],
+    correctAnswer: '??'
+  },
+  {
+    question: 'What does the "yield return" statement do in C#?',
+    wrongAnswers: [
+      'Exits the current loop iteration',
+      'Raises an exception',
+      'Breaks out of a switch statement'
+    ],
+    correctAnswer: 'Returns a value and suspends the iterator function'
+  },
+  {
+    question: 'Which C# attribute is used to specify the maximum length of a string property?',
+    wrongAnswers: ['[Size]', '[Limit]', '[Range]'],
+    correctAnswer: '[MaxLength]'
+  },
+  {
+    question: 'What is the purpose of the "this" keyword in C#?',
+    wrongAnswers: ['To define a class', 'To assign a value', 'To create an object'],
+    correctAnswer: 'To refer to the current instance of a class'
+  },
+  {
+    question: 'Which C# feature allows you to group related classes, structs, and interfaces?',
+    wrongAnswers: ['Inheritance', 'Polymorphism', 'Encapsulation'],
+    correctAnswer: 'Namespaces'
+  },
+  {
+    question: 'What is the purpose of the "using" statement in C#?',
+    wrongAnswers: ['To define a loop', 'To instantiate a class', 'To access a file', 'To format a string'],
+    correctAnswer: 'To automatically dispose of resources'
+  },
+  {
+    question: 'Which C# keyword is used to create an abstract class?',
+    wrongAnswers: ['interface', 'struct', 'sealed', 'virtual'],
+    correctAnswer: 'abstract'
+  },
+  {
+    question: 'What is the purpose of the "async" keyword in C#?',
+    wrongAnswers: ['To handle exceptions', 'To define a delegate', 'To create a thread', 'To access a database'],
+    correctAnswer: 'To enable asynchronous programming'
+  },
+  {
+    question: 'Which attribute is used to specify the display format of a DateTime property in C#?',
+    wrongAnswers: ['[DateTimeFormat]', '[Format]', '[DateTimeDisplay]'],
+    correctAnswer: '[DisplayFormat]'
+  },
+  {
+    question: 'What is the purpose of the "unchecked" keyword in C#?',
+    wrongAnswers: ['To handle exceptions', 'To perform arithmetic operations', 'To create an unchecked block'],
+    correctAnswer: 'To suppress overflow checks'
+  },
+  {
+    question: 'Which C# feature allows you to define a class within another class?',
+    wrongAnswers: ['Inheritance', 'Composition', 'Polymorphism'],
+    correctAnswer: 'Nested classes'
+  },
+  {
+    question: 'What is the purpose of the "yield break" statement in C#?',
+    wrongAnswers: [
+      'Exits the current loop iteration',
+      'Raises an exception',
+      'Breaks out of a switch statement',
+      'Returns a value and terminates the iterator function'
+    ],
+    correctAnswer: 'Terminates the iterator function without returning a value'
+  },
+  {
+    question: 'What is the purpose of the "async" modifier in C#?',
+    wrongAnswers: [
+      'To define a constant',
+      'To handle exceptions',
+      'To create an object',
+      'To declare a method'
+    ],
+    correctAnswer: 'To indicate an asynchronous method'
+  },
+  {
+    question: 'Which C# attribute is used to specify the default value of a method parameter?',
+    wrongAnswers: [
+      '[DefaultValue]',
+      '[Optional]',
+      '[Default]',
+      '[Value]'
+    ],
+    correctAnswer: '[DefaultParameterValue]'
+  },
+  {
+    question: 'What does the "nameof" operator return for a property in C#?',
+    wrongAnswers: [
+      'The property value',
+      'The property type',
+      'The property setter',
+      'The property getter'
+    ],
+    correctAnswer: 'The property name'
+  },
+  {
+    question: 'Which C# feature allows you to define properties with get and set accessors?',
+    wrongAnswers: [
+      'Constructors',
+      'Fields',
+      'Events',
+      'Methods'
+    ],
+    correctAnswer: 'Properties'
+  },
+  {
+    question: 'What is the purpose of the "lock" statement in C#?',
+    wrongAnswers: [
+      'To define a class',
+      'To declare a variable',
+      'To perform arithmetic operations'
+    ],
+    correctAnswer: 'To synchronize access to a resource'
+  },
+  {
+    question: 'Which C# attribute is used to enforce type safety at compile-time?',
+    wrongAnswers: [
+      '[Obsolete]',
+      '[Serializable]',
+      '[DebuggerDisplay]',
+      '[TypeSafe]'
+    ],
+    correctAnswer: '[TypeSafeAttribute]'
+  },
+  {
+    question: 'What is the purpose of the "using" directive in C#?',
+    wrongAnswers: [
+      'To create an object',
+      'To define a class',
+      'To access a file',
+      'To format a string'
+    ],
+    correctAnswer: 'To import namespaces'
+  },
+  {
+    question: 'Which C# feature is used to create a shorthand method implementation?',
+    wrongAnswers: [
+      'Delegates',
+      'Interfaces',
+      'Lambdas',
+      'Events'
+    ],
+    correctAnswer: 'Expression-bodied methods'
+  },
+  {
+    question: 'What is the purpose of the "base" keyword in C#?',
+    wrongAnswers: [
+      'To access a derived class',
+      'To define a base class',
+      'To call a static method',
+      'To create an object'
+    ],
+    correctAnswer: 'To access the base class members'
+  },
+  {
+    question: 'Which C# attribute is used to specify the serialization order of class members?',
+    wrongAnswers: [
+      '[DataMember]',
+      '[XmlIgnore]',
+      '[JsonProperty]'
+    ],
+    correctAnswer: '[ProtoMember]'
   }
 ];
 
@@ -221,7 +566,7 @@ function formatSecondsToTime(s: number) {
 // TODO: generate exam on server
 function generateExam(): GeneratedExamQuestion[] {
   const NUMBER_OF_ANSWERS_PER_QUESTION = 4;
-  const NUMBER_OF_QUESTIONS_IN_EXAM = 5;
+  const NUMBER_OF_QUESTIONS_IN_EXAM = 50;
   const generatedExam: GeneratedExamQuestion[] = [];
   const examFromDatabase = Array.from(examInDatabase);
 
@@ -306,7 +651,7 @@ class ShowExam extends Component<ShowExamProps, ShowExamState> {
     this.state = {
       currentQuestionIndex: 0,
       generatedExam: generatedExam,
-      examTimeInSeconds: 0,
+      examTimeInSeconds: 200,
       userExam: [],
       showResults: false
     };
@@ -506,7 +851,7 @@ class ShowExam extends Component<ShowExamProps, ShowExamState> {
             ) : (
               <div className='exam-wrapper'>
                 <div className='exam-header'>
-                  <div>{title}</div>
+                  <div>Foundational C# with Microsoft Certification Exam</div>
                   <span>|</span>
                   <div> Time: {formatSecondsToTime(examTimeInSeconds)}</div>
                   <span>|</span>
