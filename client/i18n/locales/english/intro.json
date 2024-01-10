@@ -1427,12 +1427,12 @@
       }
     }
   },
-  "example-certification": {
-    "title": "Example Certification",
+  "dotnet-certification": {
+    "title": ".NET Certification",
     "intro": ["placeholder"],
     "blocks": {
-      "example-certification-exam": {
-        "title": "Example Certification Exam",
+      "dotnet-certification-exam": {
+        "title": ".NET Certification Exam",
         "intro": ["placeholder"]
       }
     }

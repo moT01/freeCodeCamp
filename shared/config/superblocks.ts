@@ -20,7 +20,7 @@ export enum SuperBlocks {
   ProjectEuler = 'project-euler',
   CollegeAlgebraPy = 'college-algebra-with-python',
   FoundationalCSharp = 'foundational-c-sharp-with-microsoft',
-  ExampleCertification = 'example-certification',
+  DotNet = 'dotnet',
   UpcomingPython = 'upcoming-python',
   A2English = 'a2-english-for-developers',
   RosettaCode = 'rosetta-code',
@@ -72,7 +72,10 @@ export const superBlockOrder: SuperBlockOrder = {
     SuperBlocks.CollegeAlgebraPy
   ],
   [SuperBlockStages.English]: [SuperBlocks.A2English],
-  [SuperBlockStages.Professional]: [SuperBlocks.FoundationalCSharp],
+  [SuperBlockStages.Professional]: [
+    SuperBlocks.FoundationalCSharp,
+    SuperBlocks.DotNet
+  ],
   [SuperBlockStages.Extra]: [
     SuperBlocks.TheOdinProject,
     SuperBlocks.CodingInterviewPrep,
@@ -85,10 +88,7 @@ export const superBlockOrder: SuperBlockOrder = {
     SuperBlocks.PythonForEverybody
   ],
   [SuperBlockStages.New]: [],
-  [SuperBlockStages.Upcoming]: [
-    SuperBlocks.ExampleCertification,
-    SuperBlocks.UpcomingPython
-  ]
+  [SuperBlockStages.Upcoming]: [SuperBlocks.UpcomingPython]
 };
 
 Object.freeze(superBlockOrder);
