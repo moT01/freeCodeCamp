@@ -1,17 +1,17 @@
 {
-  "name": "Example Certification Exam",
+  "name": "Learn .NET: Part 1",
   "isUpcomingChange": true,
-  "dashedName": "example-certification-exam",
+  "dashedName": "learn-dotnet-part-1",
   "helpCategory": "HTML-CSS",
   "order": 0,
   "time": "2 hours",
   "template": "",
   "required": [],
-  "superBlock": "example-certification",
+  "superBlock": "dotnet",
   "challengeOrder": [
     {
       "id": "645147516c245de4d11eb7ba",
-      "title": "Certification Exam"
+      "title": "Learn .NET: Part 1"
     }
   ]
 }

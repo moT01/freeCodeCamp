@@ -85,6 +85,8 @@ const CertChallenge = ({
   const [userLoaded, setUserLoaded] = useState(false);
 
   const cert = liveCerts.find(x => x.title === title);
+  console.log(liveCerts);
+  console.log(title);
   if (!cert) throw Error(`Certification ${title} not found`);
   const certSlug = cert.certSlug;
 

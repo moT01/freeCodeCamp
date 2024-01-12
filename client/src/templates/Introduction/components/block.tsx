@@ -26,6 +26,7 @@ import {
   isNewRespCert
 } from '../../../utils/is-a-cert';
 import {
+  challengeTypes,
   isCodeAllyPractice,
   isFinalProject
 } from '../../../../../shared/config/challenge-types';
@@ -123,7 +124,8 @@ class Block extends Component<BlockProps> {
 
       const projectCondition = [
         isFinalProject(challenge.challengeType),
-        isCodeAllyPractice(challenge.challengeType)
+        isCodeAllyPractice(challenge.challengeType),
+        challenge.challengeType === challengeTypes.codespaces
       ].some(Boolean);
 
       return projectCondition && !isTakeHomeProject;

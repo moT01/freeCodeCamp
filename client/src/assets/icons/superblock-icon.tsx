@@ -18,6 +18,7 @@ import CollegeAlgebra from './college-algebra';
 import CSharpLogo from './c-sharp-logo';
 import A2EnglishIcon from './a2-english';
 import RosettaCodeIcon from './rosetta-code';
+import DotnetLogo from './dot-net-logo';
 
 const iconMap = {
   [SuperBlocks.RespWebDesignNew]: ResponsiveDesign,
@@ -38,7 +39,7 @@ const iconMap = {
   [SuperBlocks.ProjectEuler]: Graduation,
   [SuperBlocks.CollegeAlgebraPy]: CollegeAlgebra,
   [SuperBlocks.FoundationalCSharp]: CSharpLogo,
-  [SuperBlocks.ExampleCertification]: ResponsiveDesign,
+  [SuperBlocks.Dotnet]: DotnetLogo,
   [SuperBlocks.UpcomingPython]: PythonIcon,
   [SuperBlocks.A2English]: A2EnglishIcon,
   [SuperBlocks.RosettaCode]: RosettaCodeIcon,

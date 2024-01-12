@@ -54,7 +54,7 @@ const superBlockFolderMap = {
   'a2-english-for-developers': '21-a2-english-for-developers',
   'rosetta-code': '22-rosetta-code',
   'python-for-everybody': '23-python-for-everybody',
-  'example-certification': '99-example-certification'
+  'dotnet': '99-dotnet'
 };
 
 // These blocks are in the incorrect superblock. They should be moved but, for

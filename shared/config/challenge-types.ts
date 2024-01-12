@@ -22,6 +22,7 @@ const multipleChoice = 19;
 const python = 20;
 const dialogue = 21;
 const fillInTheBlank = 22;
+const codespaces = 23;
 
 export const challengeTypes = {
   html,
@@ -47,7 +48,8 @@ export const challengeTypes = {
   multipleChoice,
   python,
   dialogue,
-  fillInTheBlank
+  fillInTheBlank,
+  codespaces
 };
 
 export const isFinalProject = (challengeType: number) => {
@@ -77,7 +79,8 @@ export const hasNoTests = (challengeType: number): boolean =>
   challengeType === theOdinProject ||
   challengeType === video ||
   challengeType === dialogue ||
-  challengeType === fillInTheBlank;
+  challengeType === fillInTheBlank ||
+  challengeType === codespaces;
 
 export const hasNoSolution = (challengeType: number): boolean => {
   const noSolutions = [
@@ -98,7 +101,8 @@ export const hasNoSolution = (challengeType: number): boolean => {
     msTrophy,
     multipleChoice,
     dialogue,
-    fillInTheBlank
+    fillInTheBlank,
+    codespaces
   ];
 
   return noSolutions.includes(challengeType);
@@ -127,7 +131,8 @@ export const viewTypes = {
   [multipleChoice]: 'odin',
   [python]: 'modern',
   [dialogue]: 'dialogue',
-  [fillInTheBlank]: 'fillInTheBlank'
+  [fillInTheBlank]: 'fillInTheBlank',
+  [codespaces]: 'codeAlly'
 };
 
 // determine the type of submit function to use for the challenge on completion

@@ -20,7 +20,7 @@ export enum SuperBlocks {
   ProjectEuler = 'project-euler',
   CollegeAlgebraPy = 'college-algebra-with-python',
   FoundationalCSharp = 'foundational-c-sharp-with-microsoft',
-  DotNet = 'dotnet',
+  Dotnet = 'dotnet',
   UpcomingPython = 'upcoming-python',
   A2English = 'a2-english-for-developers',
   RosettaCode = 'rosetta-code',
@@ -74,7 +74,7 @@ export const superBlockOrder: SuperBlockOrder = {
   [SuperBlockStages.English]: [SuperBlocks.A2English],
   [SuperBlockStages.Professional]: [
     SuperBlocks.FoundationalCSharp,
-    SuperBlocks.DotNet
+    SuperBlocks.Dotnet
   ],
   [SuperBlockStages.Extra]: [
     SuperBlocks.TheOdinProject,

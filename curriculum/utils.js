@@ -85,7 +85,7 @@ const directoryToSuperblock = {
   '21-a2-english-for-developers': 'a2-english-for-developers',
   '22-rosetta-code': 'rosetta-code',
   '23-python-for-everybody': 'python-for-everybody',
-  '99-example-certification': 'example-certification'
+  '99-dotnet': 'dotnet'
 };
 
 function getSuperBlockFromDir(dir) {

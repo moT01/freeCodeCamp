@@ -26,6 +26,7 @@ export enum Certification {
   CollegeAlgebraPy = 'college-algebra-with-python-v8',
   FoundationalCSharp = 'foundational-c-sharp-with-microsoft',
   // Upcoming certifications
+  Dotnet = 'dotnet-certification-v8',
   UpcomingPython = 'upcoming-python-v8',
   A2English = 'a2-english-for-developers-v8',
   // Legacy certifications
@@ -52,7 +53,7 @@ export const currentCertifications = [
   Certification.InfoSec,
   Certification.MachineLearningPy,
   Certification.CollegeAlgebraPy,
-  Certification.FoundationalCSharp
+  Certification.FoundationalCSharp,
 ] as const;
 
 // "Legacy" certifications are another class of standard certifications. They're
@@ -75,7 +76,8 @@ export const legacyFullStackCertification = [
 // showUpcomingChanges is true.
 export const upcomingCertifications = [
   Certification.UpcomingPython,
-  Certification.A2English
+  Certification.A2English,
+  Certification.Dotnet
 ] as const;
 
 export const certTypes = {
@@ -98,7 +100,8 @@ export const certTypes = {
   collegeAlgebraPyV8: 'isCollegeAlgebraPyCertV8',
   foundationalCSharpV8: 'isFoundationalCSharpCertV8',
   upcomingPythonV8: 'isUpcomingPythonCertV8',
-  jsAlgoDataStructV8: 'isJsAlgoDataStructCertV8'
+  jsAlgoDataStructV8: 'isJsAlgoDataStructCertV8',
+  dotnetV8: 'isDotnetCertV8'
 } as const;
 
 export const certIds = {
@@ -121,7 +124,8 @@ export const certIds = {
   collegeAlgebraPyV8Id: '61531b20cc9dfa2741a5b800',
   foundationalCSharpV8Id: '647f7da207d29547b3bee1ba',
   upcomingPythonV8Id: '64afc4e8f3b37856e035b85f',
-  jsAlgoDataStructV8Id: '658180220947283cdc0689ce'
+  jsAlgoDataStructV8Id: '658180220947283cdc0689ce',
+  dotnetV8Id: '64514fda6c245de4d11eb7bb'
 };
 
 export const completionHours = {
@@ -144,7 +148,8 @@ export const completionHours = {
   [certTypes.collegeAlgebraPyV8]: 300,
   [certTypes.foundationalCSharpV8]: 300,
   [certTypes.upcomingPythonV8]: 300,
-  [certTypes.jsAlgoDataStructV8]: 300
+  [certTypes.jsAlgoDataStructV8]: 300,
+  [certTypes.dotnetV8]: 300
 };
 
 export const certSlugTypeMap = {
@@ -172,7 +177,8 @@ export const certSlugTypeMap = {
   [Certification.FoundationalCSharp]: certTypes.foundationalCSharpV8,
 
   // upcoming
-  [Certification.UpcomingPython]: certTypes.upcomingPythonV8
+  [Certification.UpcomingPython]: certTypes.upcomingPythonV8,
+  [Certification.Dotnet]: certTypes.dotnetV8
 };
 
 export const superBlockCertTypeMap = {
@@ -204,7 +210,8 @@ export const superBlockCertTypeMap = {
   [SuperBlocks.RespWebDesignNew]: certTypes.respWebDesign,
 
   // upcoming
-  [SuperBlocks.UpcomingPython]: certTypes.upcomingPythonV8
+  [SuperBlocks.UpcomingPython]: certTypes.upcomingPythonV8,
+  [SuperBlocks.Dotnet]: certTypes.dotnetV8
 };
 
 export const certTypeIdMap = {

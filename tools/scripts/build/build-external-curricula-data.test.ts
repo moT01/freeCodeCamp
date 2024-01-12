@@ -90,7 +90,7 @@ describe('external curriculum data build', () => {
       'foundational-c-sharp-with-microsoft',
       'the-odin-project',
       'upcoming-python',
-      'example-certification',
+      'dotnet',
       'a2-english-for-developers'
     ];
 

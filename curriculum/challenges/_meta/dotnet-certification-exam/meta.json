@@ -1,0 +1,17 @@
+{
+  "name": ".NET Certification Exam",
+  "isUpcomingChange": false,
+  "dashedName": "dotnet-certification-exam",
+  "helpCategory": "C-Sharp",
+  "order": 1,
+  "time": "",
+  "template": "",
+  "required": [],
+  "superBlock": "dotnet",
+  "challengeOrder": [
+    {
+      "id": "65a16aac71161f53dcc6ce4f",
+      "title": ".NET Certification Exam"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ const takeHomeBase = '/learn/coding-interview-prep/take-home-projects';
 const foundationalCSharpBase =
   '/learn/foundational-c-sharp-with-microsoft/foundational-c-sharp-with-microsoft-certification-exam';
 const upcomingPythonBase = '/learn/upcoming-python';
-const dotnetCertBase = '/learn/dotnet';
+const dotnetBase = '/learn/dotnet';
 const a2EnglishBase = '/learn/a2-english-for-developers';
 const legacyFrontEndBase = feLibsBase;
 const legacyFrontEndResponsiveBase = responsiveWebBase;
@@ -801,13 +801,13 @@ const allStandardCerts = [
   // Upcoming Certifications
   {
     id: '64514fda6c245de4d11eb7bb',
-    title: '.NET Certification',
-    certSlug: 'dotnet-v8',
+    title: '.NET',
+    certSlug: 'dotnet-certification-v8',
     projects: [
       {
-        id: '645147516c245de4d11eb7ba',
+        id: '65a16aac71161f53dcc6ce4f',
         title: '.NET Certification Exam',
-        link: `${dotnetCertBase}/dotnet-certification-exam`,
+        link: `${dotnetBase}/dotnet-certification-exam`,
         certSlug: 'dotnet-certification-v8'
       }
     ]
