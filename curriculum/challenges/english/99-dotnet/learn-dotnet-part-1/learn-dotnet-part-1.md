@@ -8,7 +8,7 @@ url: 'https://codespaces.new/moT01/dotnet-curriculum'
 
 # --description--
 
-This course shows you how to set up the development environment and walks you through creating your first ASP.NET Core app.
+This course shows you the .NET CLI development tools and walks you through creating your first ASP.NET Core app.
 
 # --instructions--
 

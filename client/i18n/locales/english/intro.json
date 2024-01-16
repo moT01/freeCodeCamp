@@ -1433,11 +1433,15 @@
     "blocks": {
       "learn-dotnet-part-1": {
         "title": "Introduction to ASP.NET Core Development",
-        "intro": ["This course shows you how to set up the development environment and walks you through creating your first ASP.NET Core app."]
+        "intro": [
+          "This course shows you the .NET CLI development tools and walks you through creating your first ASP.NET Core app."
+        ]
       },
       "dotnet-certification-exam": {
         "title": ".NET Certification Exam",
-        "intro": ["Use what you've learned to pass the exam to earn your ASP.NET Core with Microsoft Certification"]
+        "intro": [
+          "Use what you've learned to pass the exam and earn your ASP.NET Core with Microsoft Certification"
+        ]
       }
     }
   },
