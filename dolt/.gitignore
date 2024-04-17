@@ -1,0 +1,5 @@
+node_modules
+.dolt
+.dolt_dropped_databases
+curriculum
+.sqlhistory
