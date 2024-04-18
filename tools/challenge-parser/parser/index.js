@@ -1,4 +1,4 @@
-const directive = require('remark-directive');
+// const directive = require('remark-directive');
 const frontmatter = require('remark-frontmatter');
 const remark = require('remark-parse');
 const { readSync } = require('to-vfile');
@@ -13,7 +13,7 @@ const addVideoQuestion = require('./plugins/add-video-question');
 const addAssignment = require('./plugins/add-assignment');
 const replaceImports = require('./plugins/replace-imports');
 const restoreDirectives = require('./plugins/restore-directives');
-const tableAndStrikeThrough = require('./plugins/table-and-strikethrough');
+// const tableAndStrikeThrough = require('./plugins/table-and-strikethrough');
 const addScene = require('./plugins/add-scene');
 
 // by convention, anything that adds to file.data has the name add<name>.
@@ -22,9 +22,9 @@ const processor = unified()
   .use(remark)
   // modify the parser so that Github flavour tables and strikethroughs get
   // converted to 'delete' nodes
-  .use(tableAndStrikeThrough)
+  // .use(tableAndStrikeThrough)
   // directives are parsed into 'leafDirective' nodes and used for imports
-  .use(directive)
+  // .use(directive)
   // convert the text at the top of the document (surrounded by ---) into a
   // 'yaml' node
   .use(frontmatter, ['yaml'])
