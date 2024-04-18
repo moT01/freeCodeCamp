@@ -1,21 +1,20 @@
 import { writeFileSync, rmSync } from 'fs';
 import apollo from '@apollo/client/core/core.cjs';
 import { createConnection } from 'mysql';
-import { NodeHtmlMarkdown } from 'node-html-markdown';
 import { allChallengeNode, allCertificateNode } from './graphql-query.js';
 const { ApolloClient, InMemoryCache } = apollo;
 
 const query_filename = ['create-tables', 'insert', 'drop-tables'];
 
 for (const filename of query_filename) {
-  rmSync(`../queries/${filename}.sql`, {
+  rmSync(`./queries/${filename}.sql`, {
     force: true
   });
 }
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/__graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({ addTypename: false })
 });
 
 const allChallengeData = await client.query({
@@ -70,7 +69,7 @@ CREATE TABLE IF NOT EXISTS certifications(
   title TEXT NOT NULL,
   object_id VARCHAR(24) NOT NULL,
   dashed_name TEXT NOT NULL,
-  state ENUM('current','upcomming','legacy') NOT NULL,
+  state ENUM('current','upcoming','legacy') NOT NULL,
   PRIMARY KEY (id)
 );`;
   await runCreateTable(sql);
@@ -139,7 +138,8 @@ CREATE TABLE IF NOT EXISTS blocks_challenges(
 CREATE TABLE IF NOT EXISTS block_time_to_complete(
   id INT NOT NULL AUTO_INCREMENT,
   block_id INT NOT NULL,
-  time_to_complete INT NOT NULL,
+  time_to_complete TEXT NOT NULL,
+  PRIMARY KEY (id),
   FOREIGN KEY (block_id) REFERENCES blocks(id)
 )`;
   await runCreateTable(sql);
@@ -338,7 +338,7 @@ async function addChallenges(data) {
           sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
           break;
         case 'TEXT':
-          values.push(c, NodeHtmlMarkdown.translate(value));
+          values.push(c, value);
           sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
           break;
         default:
@@ -383,7 +383,7 @@ async function insert(sql, values) {
 }
 
 async function runCreateTable(sql) {
-  writeFileSync(`../queries/create-tables.sql`, '\n' + sql + '\n', {
+  writeFileSync(`./queries/create-tables.sql`, '\n' + sql + '\n', {
     flag: 'a'
   });
   await runSQL(sql);
@@ -404,7 +404,7 @@ async function createDropTablesQueries() {
       for (const row of result) {
         const { Tables_in_curriculum } = row;
         const sql = `DROP TABLE IF EXISTS ${Tables_in_curriculum};`;
-        writeFileSync(`../queries/drop-tables.sql`, sql + '\n', {
+        writeFileSync(`./queries/drop-tables.sql`, sql + '\n', {
           flag: 'a'
         });
       }

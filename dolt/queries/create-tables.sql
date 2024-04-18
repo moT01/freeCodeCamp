@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS certifications(
   title TEXT NOT NULL,
   object_id VARCHAR(24) NOT NULL,
   dashed_name TEXT NOT NULL,
-  state ENUM('current','upcomming','legacy') NOT NULL,
+  state ENUM('current','upcoming','legacy') NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -64,6 +64,15 @@ CREATE TABLE IF NOT EXISTS blocks_challenges(
 );
 
 
+CREATE TABLE IF NOT EXISTS block_time_to_complete(
+  id INT NOT NULL AUTO_INCREMENT,
+  block_id INT NOT NULL,
+  time_to_complete TEXT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (block_id) REFERENCES blocks(id)
+)
+
+
 CREATE TABLE IF NOT EXISTS assignments (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
@@ -77,15 +86,6 @@ CREATE TABLE IF NOT EXISTS challengeFiles (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   challengeFiles JSON,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS fields (
-  id INT NOT NULL AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  fields JSON,
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );
@@ -113,14 +113,6 @@ CREATE TABLE IF NOT EXISTS instructions (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   instructions TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS removeComments (
-  id INT NOT NULL AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );
@@ -171,15 +163,6 @@ CREATE TABLE IF NOT EXISTS descriptions (
 );
 
 
-CREATE TABLE IF NOT EXISTS time_to_complete (
-  id INT NOT NULL AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  time_to_complete TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);
-
-
 CREATE TABLE IF NOT EXISTS required_resources (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
@@ -193,14 +176,6 @@ CREATE TABLE IF NOT EXISTS template (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   template TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS hasEditableBoundaries (
-  id INT NOT NULL AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );
