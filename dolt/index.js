@@ -4,7 +4,7 @@ import { createConnection } from 'mysql';
 import { allChallengeNode, allCertificateNode } from './graphql-query.js';
 const { ApolloClient, InMemoryCache } = apollo;
 
-const query_filename = ['create-tables', 'insert', 'drop-tables'];
+const query_filename = ['create-tables', 'drop-tables'];
 
 for (const filename of query_filename) {
   rmSync(`./queries/${filename}.sql`, {
@@ -17,25 +17,35 @@ const client = new ApolloClient({
   cache: new InMemoryCache({ addTypename: false })
 });
 
+console.log('Querying challenge data...');
+
 const allChallengeData = await client.query({
   query: allChallengeNode
 });
 
 // console.log(JSON.stringify(data, null, 2));
 
-const connection = createConnection('mysql://root:@127.0.0.1/curriculum');
+const connection = createConnection('mysql://root:@127.0.0.1/dolt');
 
 connection.connect();
+
+console.log('Creating tables...');
 
 await seed();
 
 await createTables(allChallengeData.data.allChallengeNode.nodes);
 
+console.log('Adding challenges...');
+
 await addChallenges(allChallengeData.data.allChallengeNode.nodes);
+
+console.log('Querying certificate data...');
 
 const allCertificateData = await client.query({
   query: allCertificateNode
 });
+
+console.log('Adding certifications...');
 
 await addCertifications(allCertificateData.data.allCertificateNode.nodes);
 
@@ -44,7 +54,7 @@ await createDropTablesQueries();
 connection.end();
 
 function getTableName(key) {
-  return key;
+  return snakerize(key);
 }
 
 function getColumnType(value) {
@@ -390,25 +400,47 @@ async function runCreateTable(sql) {
 }
 
 /**
- * NOTE: The order of the tables is important, and NOT taken into account here.
- *       Tables with refs should be dropped first.
+ * The order of the tables is important.
+ * Tables with refs are dropped first.
  */
 async function createDropTablesQueries() {
-  const sql = `show tables;`;
+  const sql = `SELECT TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM
+  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+  REFERENCED_TABLE_SCHEMA = (SELECT DATABASE());`;
   return new Promise((resolve, _reject) => {
     connection.query(sql, (err, result) => {
       if (err) {
         console.error('Error running SQL:\n', sql);
         throw err;
       }
-      for (const row of result) {
-        const { Tables_in_curriculum } = row;
-        const sql = `DROP TABLE IF EXISTS ${Tables_in_curriculum};`;
+      const referenced_tables = new Set();
+      const referrers = new Set();
+      for (const referrer of result) {
+        const { TABLE_NAME, REFERENCED_TABLE_NAME } = referrer;
+        referrers.add(TABLE_NAME);
+        referenced_tables.add(REFERENCED_TABLE_NAME);
+      }
+      for (const table_name of referrers) {
+        const sql = `DROP TABLE IF EXISTS ${table_name};`;
+        writeFileSync(`./queries/drop-tables.sql`, sql + '\n', {
+          flag: 'a'
+        });
+      }
+      for (const table_name of referenced_tables) {
+        const sql = `DROP TABLE IF EXISTS ${table_name};`;
         writeFileSync(`./queries/drop-tables.sql`, sql + '\n', {
           flag: 'a'
         });
       }
       resolve();
     });
+  });
+}
+
+function snakerize(str) {
+  return str.replace(/(([A-Z]{2,}(?![a-z]))|([A-Z]))/g, $1 => {
+    return '_' + $1.toLowerCase();
   });
 }
