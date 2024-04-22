@@ -337,7 +337,6 @@ async function addChallenges(data) {
       } else {
         feature_table_ids[tableName]++;
       }
-      // push to features table id's
 
       const columnType = getColumnType(value);
       const values = [];
