@@ -227,8 +227,9 @@ async function addCertifications(data) {
   for (const certificateNode of data) {
     const { certification, id, tests, title } = certificateNode.challenge;
 
-    const sql = `INSERT INTO certifications (title, object_id, dashed_name, state) VALUES (?,?,?,?);`;
+    const sql = `INSERT INTO certifications (id, title, object_id, dashed_name, state) VALUES (?,?,?,?,?);`;
     await insert(sql, [
+      certification_id,
       title,
       id,
       certification,
@@ -250,10 +251,12 @@ async function addChallenges(data) {
 
   const superblock_to_superblock_id_map = new Map();
   const block_to_block_id_map = new Map();
+  const feature_table_ids = {};
   let block_id = 1;
   let superblock_id = 1;
   let sql = '';
   let c = 1;
+
   for (const challengeNode of data) {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -283,16 +286,16 @@ async function addChallenges(data) {
     challenge.required_resources = required;
 
     if (!superblockSet.has(superBlock)) {
-      sql = `INSERT INTO superblocks (title, dashed_name, superblock_order) VALUES (?,?,?);`;
-      await insert(sql, [superBlock, superBlock, superOrder]);
+      sql = `INSERT INTO superblocks (id, title, dashed_name, superblock_order) VALUES (?,?,?,?);`;
+      await insert(sql, [superblock_id, superBlock, superBlock, superOrder]);
       superblockSet.add(superBlock);
       superblock_to_superblock_id_map.set(superBlock, superblock_id);
       superblock_id += 1;
     }
 
     if (!blockSet.has(block)) {
-      sql = `INSERT INTO blocks (title, dashed_name) VALUES (?,?);`;
-      await insert(sql, [block, block]);
+      sql = `INSERT INTO blocks (id, title, dashed_name) VALUES (?,?,?);`;
+      await insert(sql, [block_id, block, block]);
       blockSet.add(block);
       block_to_block_id_map.set(block, block_id);
 
@@ -303,8 +306,8 @@ async function addChallenges(data) {
       block_id += 1;
     }
 
-    sql = `INSERT INTO challenges (title, object_id, dashed_name) VALUES (?,?,?);`;
-    await insert(sql, [title, id, dashedName]);
+    sql = `INSERT INTO challenges (id, title, object_id, dashed_name) VALUES (?,?,?,?);`;
+    await insert(sql, [c, title, id, dashedName]);
 
     if (
       superblock_to_superblock_id_map.get(superBlock) &&
@@ -328,32 +331,40 @@ async function addChallenges(data) {
       if (!value || value?.length === 0) {
         continue;
       }
+
+      if (!feature_table_ids[tableName]) {
+        feature_table_ids[tableName] = 1;
+      } else {
+        feature_table_ids[tableName]++;
+      }
+      // push to features table id's
+
       const columnType = getColumnType(value);
       const values = [];
       switch (columnType) {
         case 'BOOLEAN':
           if (value) {
-            values.push(c);
-            sql = `INSERT INTO ${tableName} (challenge_id) VALUES (?);`;
+            values.push(feature_table_ids[tableName], c);
+            sql = `INSERT INTO ${tableName} (id, challenge_id) VALUES (?,?);`;
           } else {
             continue;
           }
           break;
         case 'JSON':
-          values.push(c, JSON.stringify(value));
-          sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
+          values.push(feature_table_ids[tableName], c, JSON.stringify(value));
+          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
           break;
         case 'INT':
-          values.push(c, value);
-          sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
+          values.push(feature_table_ids[tableName], c, value);
+          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
           break;
         case 'TEXT':
-          values.push(c, value);
-          sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
+          values.push(feature_table_ids[tableName], c, value);
+          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
           break;
         default:
-          values.push(c, value);
-          sql = `INSERT INTO ${tableName} (challenge_id, ${key}) VALUES (?,?);`;
+          values.push(feature_table_ids[tableName], c, value);
+          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
           break;
       }
 
