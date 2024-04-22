@@ -1,6 +1,6 @@
 import { challengeTypes } from '../shared/config/challenge-types.js';
 
-const solution_url_required = {
+const app_url = {
   columns: [
     {
       name: 'id',
@@ -9,6 +9,10 @@ const solution_url_required = {
     {
       name: 'challenge_id',
       type: 'INT NOT NULL'
+    },
+    {
+      name: 'required',
+      type: 'BOOLEAN NOT NULL'
     }
   ],
   constraints: [
@@ -19,5 +23,17 @@ const solution_url_required = {
 export const challengeTypeToTablesMap = {
   [challengeTypes.html]: [],
   [challengeTypes.js]: [],
-  [challengeTypes.backEndProject]: [solution_url_required]
+  [challengeTypes.backEndProject]: [app_url]
 };
+
+// Features
+/**
+ * 1. app_url (required) {
+ *  challenge_id INT
+ *  required BOOLEAN
+ * }
+ * 2. source_code_url (required)
+ * 3. local_address_allowed
+ * 4. editor_address_allowed
+ * 5. display_preview_modal
+ */
