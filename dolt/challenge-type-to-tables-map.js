@@ -37,3 +37,5 @@ export const challengeTypeToTablesMap = {
  * 4. editor_address_allowed
  * 5. display_preview_modal
  */
+
+// challengeType.modern === challengeType.js + preview
