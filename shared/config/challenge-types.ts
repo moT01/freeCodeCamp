@@ -60,7 +60,6 @@ export const hasNoTests = (challengeType: number): boolean =>
 export const hasNoSolution = (challengeType: number): boolean => {
   const noSolutions = [
     backend,
-    zipline,
     frontEndProject,
     backEndProject,
     step,

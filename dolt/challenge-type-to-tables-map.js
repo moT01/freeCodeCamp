@@ -19,8 +19,30 @@ const solution_url_required = {
 export const challengeTypeToTablesMap = {
   [challengeTypes.html]: [],
   [challengeTypes.js]: [],
-  [challengeTypes.backEndProject]: [solution_url_required]
+  [challengeTypes.jsProject]: [],
+  [challengeTypes.frontEndProject]: [],
+  [challengeTypes.backEndProject]: [solution_url_required],
+  [challengeTypes.pythonProject]: [],
+  [challengeTypes.modern]: [],
+  [challengeTypes.step]: [],
+  [challengeTypes.quiz]: [],
+  [challengeTypes.backend]: [],
+  [challengeTypes.video]: [],
+  [challengeTypes.codeAllyPractice]: [],
+  [challengeTypes.codeAllyCert]: [],
+  [challengeTypes.multifileCertProject]: [],
+  [challengeTypes.theOdinProject]: [],
+  [challengeTypes.colab]: [],
+  [challengeTypes.exam]: [],
+  [challengeTypes.msTrophy]: [],
+  [challengeTypes.multipleChoice]: [],
+  [challengeTypes.python]: [],
+  [challengeTypes.dialogue]: [],
+  [challengeTypes.fillInTheBlank]: [],
+  [challengeTypes.multifilePythonCertProject]: []
 };
+
+// Add challenge types to CDB
 
 // Features
 /**

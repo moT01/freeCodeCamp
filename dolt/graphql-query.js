@@ -28,6 +28,7 @@ export const allChallengeNode = gql`
             tail
           }
           challengeOrder
+          challengeType
           description
           dashedName
           disableLoopProtectPreview

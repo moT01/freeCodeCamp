@@ -164,7 +164,6 @@ async function createTables(data) {
       /* eslint-disable @typescript-eslint/no-unused-vars */
       block,
       certification,
-      challengeType,
       challengeOrder,
       dashedName,
       id,
