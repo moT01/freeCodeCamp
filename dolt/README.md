@@ -25,11 +25,11 @@ dolt push origin main
 Make a query with a file
 
 ```bash
-mysql --host 127.0.0.1 --port 3306 -u root -p curriculum < queries/<name>.sql
+mysql --host 127.0.0.1 --port 3306 -u root -p dolt < queries/<name>.sql
 ```
 
 ```bash
-DATABASE_URL=mysql://root:@127.0.0.1/curriculum
+DATABASE_URL=mysql://root:@127.0.0.1/dolt
 ```
 
 MYSQL has reserved words: https://dev.mysql.com/doc/refman/8.0/en/keywords.html

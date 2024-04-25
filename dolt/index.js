@@ -153,6 +153,54 @@ CREATE TABLE IF NOT EXISTS block_time_to_complete(
   FOREIGN KEY (block_id) REFERENCES blocks(id)
 )`;
   await runCreateTable(sql);
+
+  // Additional feature tables to replace challengeTypes
+  sql = `
+CREATE TABLE IF NOT EXISTS app_url(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  required BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);`;
+  await runCreateTable(sql);
+
+  sql = `
+CREATE TABLE IF NOT EXISTS source_code_url(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  required BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);`;
+  await runCreateTable(sql);
+
+  sql = `
+CREATE TABLE IF NOT EXISTS local_address_allowed(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);`;
+  await runCreateTable(sql);
+
+  sql = `
+CREATE TABLE IF NOT EXISTS editor_address_allowed(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);`;
+  await runCreateTable(sql);
+
+  sql = `
+CREATE TABLE IF NOT EXISTS display_preview_modal(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);`;
+  await runCreateTable(sql);
 }
 
 async function createTables(data) {
@@ -327,7 +375,7 @@ async function addChallenges(data) {
     // Add to feature tables
     for (const [key, value] of Object.entries(challenge)) {
       const tableName = getTableName(key);
-      if (!value || value?.length === 0) {
+      if (typeof value !== 'number' && (!value || value?.length === 0)) {
         continue;
       }
 

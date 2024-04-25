@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS assignments (
 );
 
 
-CREATE TABLE IF NOT EXISTS challengeFiles (
+CREATE TABLE IF NOT EXISTS challenge_files (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   challengeFiles JSON,
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS challengeFiles (
 );
 
 
-CREATE TABLE IF NOT EXISTS forumTopicId (
+CREATE TABLE IF NOT EXISTS forum_topic_id (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   forumTopicId INT,
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS forumTopicId (
 );
 
 
-CREATE TABLE IF NOT EXISTS helpCategory (
+CREATE TABLE IF NOT EXISTS help_category (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   helpCategory TEXT,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS title (
 );
 
 
-CREATE TABLE IF NOT EXISTS videoUrl (
+CREATE TABLE IF NOT EXISTS video_url (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   videoUrl TEXT,
@@ -172,6 +172,15 @@ CREATE TABLE IF NOT EXISTS required_resources (
 );
 
 
+CREATE TABLE IF NOT EXISTS challenge_type (
+  id INT NOT NULL AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  challengeType INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
 CREATE TABLE IF NOT EXISTS template (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
@@ -181,7 +190,7 @@ CREATE TABLE IF NOT EXISTS template (
 );
 
 
-CREATE TABLE IF NOT EXISTS usesMultifileEditor (
+CREATE TABLE IF NOT EXISTS uses_multifile_editor (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -189,7 +198,7 @@ CREATE TABLE IF NOT EXISTS usesMultifileEditor (
 );
 
 
-CREATE TABLE IF NOT EXISTS bilibiliIds (
+CREATE TABLE IF NOT EXISTS bilibili_ids (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   bilibiliIds JSON,
@@ -207,7 +216,7 @@ CREATE TABLE IF NOT EXISTS question (
 );
 
 
-CREATE TABLE IF NOT EXISTS videoId (
+CREATE TABLE IF NOT EXISTS video_id (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   videoId TEXT,
@@ -234,7 +243,7 @@ CREATE TABLE IF NOT EXISTS course_url (
 );
 
 
-CREATE TABLE IF NOT EXISTS disableLoopProtectPreview (
+CREATE TABLE IF NOT EXISTS disable_loop_protect_preview (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -242,7 +251,7 @@ CREATE TABLE IF NOT EXISTS disableLoopProtectPreview (
 );
 
 
-CREATE TABLE IF NOT EXISTS disableLoopProtectTests (
+CREATE TABLE IF NOT EXISTS disable_loop_protect_tests (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -250,7 +259,7 @@ CREATE TABLE IF NOT EXISTS disableLoopProtectTests (
 );
 
 
-CREATE TABLE IF NOT EXISTS msTrophyId (
+CREATE TABLE IF NOT EXISTS ms_trophy_id (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   msTrophyId TEXT,
@@ -277,7 +286,7 @@ CREATE TABLE IF NOT EXISTS scene (
 );
 
 
-CREATE TABLE IF NOT EXISTS fillInTheBlank (
+CREATE TABLE IF NOT EXISTS fill_in_the_blank (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   fillInTheBlank JSON,
@@ -286,7 +295,7 @@ CREATE TABLE IF NOT EXISTS fillInTheBlank (
 );
 
 
-CREATE TABLE IF NOT EXISTS audioPath (
+CREATE TABLE IF NOT EXISTS audio_path (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   audioPath TEXT,
@@ -295,7 +304,7 @@ CREATE TABLE IF NOT EXISTS audioPath (
 );
 
 
-CREATE TABLE IF NOT EXISTS videoLocaleIds (
+CREATE TABLE IF NOT EXISTS video_locale_ids (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   videoLocaleIds JSON,

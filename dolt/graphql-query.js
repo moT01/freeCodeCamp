@@ -122,9 +122,7 @@ export const allChallengeNode = gql`
           }
           time
           title
-          translationPending
           url
-          usesMultifileEditor
           videoId
           videoLocaleIds {
             espanol
