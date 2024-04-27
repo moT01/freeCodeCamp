@@ -2,6 +2,10 @@ import { writeFileSync, rmSync } from 'fs';
 import apollo from '@apollo/client/core/core.cjs';
 import { createConnection } from 'mysql';
 import { allChallengeNode, allCertificateNode } from './graphql-query.js';
+import {
+  challengeTypeToTablesMap,
+  insert
+} from './challenge-type-to-tables-map.js';
 const { ApolloClient, InMemoryCache } = apollo;
 
 const query_filename = ['create-tables', 'drop-tables'];
@@ -31,13 +35,13 @@ connection.connect();
 
 console.log('Creating tables...');
 
-await seed();
+await seed(connection);
 
-await createTables(allChallengeData.data.allChallengeNode.nodes);
+await createTables(connection, allChallengeData.data.allChallengeNode.nodes);
 
 console.log('Adding challenges...');
 
-await addChallenges(allChallengeData.data.allChallengeNode.nodes);
+await addChallenges(connection, allChallengeData.data.allChallengeNode.nodes);
 
 console.log('Querying certificate data...');
 
@@ -47,9 +51,12 @@ const allCertificateData = await client.query({
 
 console.log('Adding certifications...');
 
-await addCertifications(allCertificateData.data.allCertificateNode.nodes);
+await addCertifications(
+  connection,
+  allCertificateData.data.allCertificateNode.nodes
+);
 
-await createDropTablesQueries();
+await createDropTablesQueries(connection);
 
 connection.end();
 
@@ -72,7 +79,7 @@ function getColumnType(value) {
   }
 }
 
-async function seed() {
+async function seed(connection) {
   let sql = `
 CREATE TABLE IF NOT EXISTS certifications(
   id INT NOT NULL AUTO_INCREMENT,
@@ -82,7 +89,7 @@ CREATE TABLE IF NOT EXISTS certifications(
   state ENUM('current','upcoming','legacy') NOT NULL,
   PRIMARY KEY (id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS certifications_prerequisites(
@@ -91,7 +98,7 @@ CREATE TABLE IF NOT EXISTS certifications_prerequisites(
   PRIMARY KEY (certification_id, prerequisite_object_id),
   FOREIGN KEY (certification_id) REFERENCES certifications(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS superblocks(
@@ -101,7 +108,7 @@ CREATE TABLE IF NOT EXISTS superblocks(
   superblock_order INT NOT NULL,
   PRIMARY KEY (id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS blocks(
@@ -110,7 +117,7 @@ CREATE TABLE IF NOT EXISTS blocks(
   dashed_name TEXT NOT NULL,
   PRIMARY KEY (id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS superblocks_blocks(
@@ -121,7 +128,7 @@ CREATE TABLE IF NOT EXISTS superblocks_blocks(
   FOREIGN KEY (superblock_id) REFERENCES superblocks(id),
   FOREIGN KEY (block_id) REFERENCES blocks(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS challenges (
@@ -131,7 +138,7 @@ CREATE TABLE IF NOT EXISTS challenges (
   dashed_name TEXT NOT NULL,
   PRIMARY KEY (id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS blocks_challenges(
@@ -142,7 +149,7 @@ CREATE TABLE IF NOT EXISTS blocks_challenges(
   FOREIGN KEY (block_id) REFERENCES blocks(id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS block_time_to_complete(
@@ -152,7 +159,7 @@ CREATE TABLE IF NOT EXISTS block_time_to_complete(
   PRIMARY KEY (id),
   FOREIGN KEY (block_id) REFERENCES blocks(id)
 )`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   // Additional feature tables to replace challengeTypes
   sql = `
@@ -163,7 +170,7 @@ CREATE TABLE IF NOT EXISTS app_url(
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS source_code_url(
@@ -173,7 +180,7 @@ CREATE TABLE IF NOT EXISTS source_code_url(
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS local_address_allowed(
@@ -182,7 +189,7 @@ CREATE TABLE IF NOT EXISTS local_address_allowed(
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS editor_address_allowed(
@@ -191,7 +198,7 @@ CREATE TABLE IF NOT EXISTS editor_address_allowed(
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 
   sql = `
 CREATE TABLE IF NOT EXISTS display_preview_modal(
@@ -200,10 +207,10 @@ CREATE TABLE IF NOT EXISTS display_preview_modal(
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );`;
-  await runCreateTable(sql);
+  await runCreateTable(connection, sql);
 }
 
-async function createTables(data) {
+async function createTables(connection, data) {
   const createdTables = [];
   for (const challengeNode of data) {
     const {
@@ -263,36 +270,44 @@ CREATE TABLE IF NOT EXISTS ${tableName} (
       }
       if (!createdTables.includes(tableName)) {
         createdTables.push(tableName);
-        await runCreateTable(sql);
+        await runCreateTable(connection, sql);
       }
     }
   }
 }
 
-async function addCertifications(data) {
+async function addCertifications(connection, data) {
   let certification_id = 1;
   for (const certificateNode of data) {
     const { certification, id, tests, title } = certificateNode.challenge;
 
-    const sql = `INSERT INTO certifications (id, title, object_id, dashed_name, state) VALUES (?,?,?,?,?);`;
-    await insert(sql, [
-      certification_id,
-      title,
-      id,
-      certification,
-      title.includes('Legacy') ? 'legacy' : 'current'
-    ]);
+    await insert(
+      connection,
+      'certifications',
+      ['id', 'title', 'object_id', 'dashed_name', 'state'],
+      [
+        certification_id,
+        title,
+        id,
+        certification,
+        title.includes('Legacy') ? 'legacy' : 'current'
+      ]
+    );
     for (const test of tests) {
       const { id: test_id } = test;
-      const sql = `INSERT INTO certifications_prerequisites (certification_id, prerequisite_object_id) VALUES (?,?);`;
-      await insert(sql, [certification_id, test_id]);
+      await insert(
+        connection,
+        'certifications_prerequisites',
+        ['certification_id', 'prerequisite_object_id'],
+        [certification_id, test_id]
+      );
     }
 
     certification_id += 1;
   }
 }
 
-async function addChallenges(data) {
+async function addChallenges(connection, data) {
   const superblockSet = new Set();
   const blockSet = new Set();
 
@@ -301,7 +316,6 @@ async function addChallenges(data) {
   const feature_table_ids = {};
   let block_id = 1;
   let superblock_id = 1;
-  let sql = '';
   let c = 1;
 
   for (const challengeNode of data) {
@@ -333,28 +347,44 @@ async function addChallenges(data) {
     challenge.required_resources = required;
 
     if (!superblockSet.has(superBlock)) {
-      sql = `INSERT INTO superblocks (id, title, dashed_name, superblock_order) VALUES (?,?,?,?);`;
-      await insert(sql, [superblock_id, superBlock, superBlock, superOrder]);
+      await insert(
+        connection,
+        'superblocks',
+        ['id', 'title', 'dashed_name', 'superblock_order'],
+        [superblock_id, superBlock, superBlock, superOrder]
+      );
       superblockSet.add(superBlock);
       superblock_to_superblock_id_map.set(superBlock, superblock_id);
       superblock_id += 1;
     }
 
     if (!blockSet.has(block)) {
-      sql = `INSERT INTO blocks (id, title, dashed_name) VALUES (?,?,?);`;
-      await insert(sql, [block_id, block, block]);
+      await insert(
+        connection,
+        'blocks',
+        ['id', 'title', 'dashed_name'],
+        [block_id, block, block]
+      );
       blockSet.add(block);
       block_to_block_id_map.set(block, block_id);
 
       // Add `block_time_to_complete` as special case, because it is per-block
-      sql = `INSERT INTO block_time_to_complete (block_id, time_to_complete) VALUES (?,?);`;
-      await insert(sql, [block_id, time]);
+      await insert(
+        connection,
+        'block_time_to_complete',
+        ['block_id', 'time_to_complete'],
+        [block_id, time]
+      );
 
       block_id += 1;
     }
 
-    sql = `INSERT INTO challenges (id, title, object_id, dashed_name) VALUES (?,?,?,?);`;
-    await insert(sql, [c, title, id, dashedName]);
+    await insert(
+      connection,
+      'challenges',
+      ['id', 'title', 'object_id', 'dashed_name'],
+      [c, title, id, dashedName]
+    );
 
     if (
       superblock_to_superblock_id_map.get(superBlock) &&
@@ -362,15 +392,28 @@ async function addChallenges(data) {
     ) {
       const superblockId = superblock_to_superblock_id_map.get(superBlock);
       const blockId = block_to_block_id_map.get(block);
-      sql = `INSERT INTO superblocks_blocks (superblock_id, block_id, block_order) VALUES (?,?,?);`;
-      await insert(sql, [superblockId, blockId, order]);
+      await insert(
+        connection,
+        'superblocks_blocks',
+        ['superblock_id', 'block_id', 'block_order'],
+        [superblockId, blockId, order]
+      );
     }
 
     if (block_to_block_id_map.get(block)) {
       const blockId = block_to_block_id_map.get(block);
-      sql = `INSERT INTO blocks_challenges (block_id, challenge_id, challenge_order) VALUES (?,?,?);`;
-      await insert(sql, [blockId, c, challengeOrder]);
+      await insert(
+        connection,
+        'blocks_challenges',
+        ['block_id', 'challenge_id', 'challenge_order'],
+        [blockId, c, challengeOrder]
+      );
     }
+
+    challengeTypeToTablesMap[challenge.challengeType].forEach(async fn => {
+      const reChallenge = { block, ...challenge };
+      await fn(connection, reChallenge);
+    });
 
     // Add to feature tables
     for (const [key, value] of Object.entries(challenge)) {
@@ -386,41 +429,36 @@ async function addChallenges(data) {
       }
 
       const columnType = getColumnType(value);
-      const values = [];
-      switch (columnType) {
-        case 'BOOLEAN':
-          if (value) {
-            values.push(feature_table_ids[tableName], c);
-            sql = `INSERT INTO ${tableName} (id, challenge_id) VALUES (?,?);`;
-          } else {
-            continue;
-          }
-          break;
-        case 'JSON':
-          values.push(feature_table_ids[tableName], c, JSON.stringify(value));
-          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
-          break;
-        case 'INT':
-          values.push(feature_table_ids[tableName], c, value);
-          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
-          break;
-        case 'TEXT':
-          values.push(feature_table_ids[tableName], c, value);
-          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
-          break;
-        default:
-          values.push(feature_table_ids[tableName], c, value);
-          sql = `INSERT INTO ${tableName} (id, challenge_id, ${key}) VALUES (?,?,?);`;
-          break;
+      const values = [feature_table_ids[tableName], c];
+      if (columnType === 'BOOLEAN') {
+        if (value) {
+          await insert(connection, tableName, ['id', 'challenge_id'], values);
+        } else {
+          continue;
+        }
+      } else if (columnType === 'JSON') {
+        values.push(JSON.stringify(value));
+        await insert(
+          connection,
+          tableName,
+          ['id', 'challenge_id', key],
+          values
+        );
+      } else {
+        values.push(value);
+        await insert(
+          connection,
+          tableName,
+          ['id', 'challenge_id', key],
+          values
+        );
       }
-
-      await insert(sql, values);
     }
     c += 1;
   }
 }
 
-async function runSQL(sql) {
+async function runSQL(connection, sql) {
   return new Promise((resolve, _reject) => {
     connection.query(sql, (err, _result) => {
       if (err) {
@@ -432,35 +470,18 @@ async function runSQL(sql) {
   });
 }
 
-async function insert(sql, values) {
-  // TODO: This is not useful without the values included
-  // writeFileSync(`../queries/insert.sql`, "\n" + sql + "\n", {
-  //   flag: "a",
-  // });
-  return new Promise((resolve, _reject) => {
-    connection.query(sql, values, (err, _result) => {
-      if (err) {
-        console.error('Error running SQL:\n', sql);
-        console.error('\n... with values:\n', values);
-        throw err;
-      }
-      resolve();
-    });
-  });
-}
-
-async function runCreateTable(sql) {
+async function runCreateTable(connection, sql) {
   writeFileSync(`./queries/create-tables.sql`, '\n' + sql + '\n', {
     flag: 'a'
   });
-  await runSQL(sql);
+  await runSQL(connection, sql);
 }
 
 /**
  * The order of the tables is important.
  * Tables with refs are dropped first.
  */
-async function createDropTablesQueries() {
+async function createDropTablesQueries(connection) {
   const sql = `SELECT TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
 FROM
   INFORMATION_SCHEMA.KEY_COLUMN_USAGE

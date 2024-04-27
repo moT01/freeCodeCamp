@@ -1,45 +1,51 @@
 import { challengeTypes } from '../shared/config/challenge-types.js';
 
-const app_url = required => async (connection, challenge_id) =>
+const app_url = required => async (connection, challenge) =>
   await insert(
     connection,
     'app_url',
     ['challenge_id', 'required'],
-    [challenge_id, required]
+    [challenge.id, required]
   );
-const source_code_url = required => async (connection, challenge_id) =>
+const source_code_url = required => async (connection, challenge) =>
   await insert(
     connection,
     'source_code_url',
     ['challenge_id', 'required'],
-    [challenge_id, required]
+    [challenge.id, required]
   );
-const local_address_allowed = async (connection, challenge_id) =>
+const local_address_allowed = async (connection, challenge) =>
   await insert(
     connection,
     'local_address_allowed',
     ['challenge_id'],
-    [challenge_id]
+    [challenge.id]
   );
-const editor_address_allowed = async (connection, challenge_id) =>
+const editor_address_allowed = async (connection, challenge) =>
   await insert(
     connection,
     'editor_address_allowed',
     ['challenge_id'],
-    [challenge_id]
+    [challenge.id]
   );
 
-// Currently, needs the challenge_order to determine if is first challenge
-const _display_preview_modal = async (connection, challenge_id) =>
-  await insert(
-    connection,
-    'display_preview_modal',
-    ['challenge_id'],
-    [challenge_id]
-  );
+const display_preview_modal = async (connection, challenge) => {
+  if (
+    challenge.order === 0 &&
+    challenge.block !==
+      'learn-introductory-javascript-by-building-a-pyramid-generator'
+  ) {
+    await insert(
+      connection,
+      'display_preview_modal',
+      ['challenge_id'],
+      [challenge.id]
+    );
+  }
+};
 
 export const challengeTypeToTablesMap = {
-  [challengeTypes.html]: [],
+  [challengeTypes.html]: [display_preview_modal],
   [challengeTypes.js]: [],
   [challengeTypes.jsProject]: [],
   [challengeTypes.frontEndProject]: [app_url(true)],
@@ -50,26 +56,26 @@ export const challengeTypeToTablesMap = {
     editor_address_allowed
   ],
   [challengeTypes.pythonProject]: [source_code_url(true)],
-  [challengeTypes.modern]: [],
+  [challengeTypes.modern]: [display_preview_modal],
   [challengeTypes.step]: [],
   [challengeTypes.quiz]: [],
   [challengeTypes.backend]: [app_url(true), local_address_allowed],
   [challengeTypes.video]: [],
   [challengeTypes.codeAllyPractice]: [],
   [challengeTypes.codeAllyCert]: [app_url(true), editor_address_allowed],
-  [challengeTypes.multifileCertProject]: [],
+  [challengeTypes.multifileCertProject]: [display_preview_modal],
   [challengeTypes.theOdinProject]: [],
   [challengeTypes.colab]: [],
   [challengeTypes.exam]: [],
   [challengeTypes.msTrophy]: [],
   [challengeTypes.multipleChoice]: [],
-  [challengeTypes.python]: [],
+  [challengeTypes.python]: [display_preview_modal],
   [challengeTypes.dialogue]: [],
   [challengeTypes.fillInTheBlank]: [],
-  [challengeTypes.multifilePythonCertProject]: []
+  [challengeTypes.multifilePythonCertProject]: [display_preview_modal]
 };
 
-async function insert(connection, tableName, columnNames, columnValues) {
+export async function insert(connection, tableName, columnNames, columnValues) {
   const values = columnValues.map(_v => `?`).join(', ');
   const columns = columnNames.join(', ');
   const sql = `INSERT INTO ${tableName} (${columns}) VALUES (${values});`;
