@@ -22,10 +22,14 @@ dolt push origin main
 
 ## Notes
 
+The database name in Dolt is the directory name. This is NOT configurable.
+
 Make a query with a file
 
 ```bash
 mysql --host 127.0.0.1 --port 3306 -u root -p dolt < queries/<name>.sql
+# OR
+dolt sql < queries/<name>.sql
 ```
 
 ```bash

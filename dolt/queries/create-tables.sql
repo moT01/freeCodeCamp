@@ -73,6 +73,48 @@ CREATE TABLE IF NOT EXISTS block_time_to_complete(
 )
 
 
+CREATE TABLE IF NOT EXISTS app_url(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  required BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS source_code_url(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  required BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS local_address_allowed(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS editor_address_allowed(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS display_preview_modal(
+  id INT AUTO_INCREMENT,
+  challenge_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
+);
+
+
 CREATE TABLE IF NOT EXISTS assignments (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
@@ -185,14 +227,6 @@ CREATE TABLE IF NOT EXISTS template (
   id INT NOT NULL AUTO_INCREMENT,
   challenge_id INT NOT NULL,
   template TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS uses_multifile_editor (
-  id INT NOT NULL AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (challenge_id) REFERENCES challenges(id)
 );

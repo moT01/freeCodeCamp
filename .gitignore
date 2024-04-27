@@ -213,3 +213,7 @@ curriculum/build
 ### Playwright ###
 
 /playwright
+
+### Dolt ###
+.sqlhistory
+.dolt*

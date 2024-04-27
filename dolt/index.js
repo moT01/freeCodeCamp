@@ -411,7 +411,7 @@ async function addChallenges(connection, data) {
     }
 
     challengeTypeToTablesMap[challenge.challengeType].forEach(async fn => {
-      const reChallenge = { block, ...challenge };
+      const reChallenge = { block, id: c, order, ...challenge };
       await fn(connection, reChallenge);
     });
 
