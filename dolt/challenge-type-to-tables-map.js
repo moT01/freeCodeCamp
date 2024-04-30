@@ -1,4 +1,5 @@
 import { challengeTypes } from '../shared/config/challenge-types.js';
+import { insert } from './utils.js';
 
 const app_url = required => async (connection, challenge) =>
   await insert(
@@ -74,21 +75,6 @@ export const challengeTypeToTablesMap = {
   [challengeTypes.fillInTheBlank]: [],
   [challengeTypes.multifilePythonCertProject]: [display_preview_modal]
 };
-
-export async function insert(connection, tableName, columnNames, columnValues) {
-  const values = columnValues.map(_v => `?`).join(', ');
-  const columns = columnNames.join(', ');
-  const sql = `INSERT INTO ${tableName} (${columns}) VALUES (${values});`;
-  return new Promise((resolve, _reject) => {
-    connection.query(sql, columnValues, (err, result) => {
-      if (err) {
-        console.error('Error running SQL:\n', sql);
-        throw err;
-      }
-      resolve(result);
-    });
-  });
-}
 
 // Features
 /**
