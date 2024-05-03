@@ -18,6 +18,8 @@ const { isAuditedSuperBlock } = require('../shared/utils/is-audited');
 const { createPoly } = require('../shared/utils/polyvinyl');
 const { getSuperOrder, getSuperBlockFromDir } = require('./utils');
 
+const { addDescriptionToChallenge } = require('./capi-connector');
+
 const access = util.promisify(fs.access);
 
 const CHALLENGES_DIR = path.resolve(__dirname, 'challenges');
@@ -317,13 +319,17 @@ function generateChallengeCreator(lang, englishPath, i18nPath) {
     const langUsed = isAudited && fs.existsSync(i18nPath) ? lang : 'english';
 
     const challenge = translateCommentsInChallenge(
-      await parseMD(langUsed === 'english' ? englishPath : i18nPath),
+      await parseMD(langUsed === 'english' ? englishPath : i18nPath, langUsed),
       langUsed,
       COMMENT_TRANSLATIONS
     );
     challenge.translationPending = lang !== 'english' && !isAudited;
     addMetaToChallenge(challenge, meta);
     fixChallengeProperties(challenge);
+
+    if (lang === 'english') {
+      await addDescriptionToChallenge(challenge, lang);
+    }
 
     return challenge;
   }
