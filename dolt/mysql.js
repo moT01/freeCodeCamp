@@ -6,6 +6,7 @@ import {
   insert
 } from './utils.js';
 import { challengeTypeToTablesMap } from './challenge-type-to-tables-map.js';
+import { getSuperblockTitle, getBlockTitle } from './dashed-names-to-titles.js';
 
 export async function withConnection(connectionString, callback) {
   const connection = createConnection(connectionString);
@@ -286,7 +287,7 @@ export async function addChallenges(connection, data) {
         connection,
         'superblocks',
         ['id', 'title', 'dashed_name', 'superblock_order'],
-        [superblock_id, superBlock, superBlock, superOrder]
+        [superblock_id, getSuperblockTitle(superBlock), superBlock, superOrder]
       );
       superblockSet.add(superBlock);
       superblock_to_superblock_id_map.set(superBlock, superblock_id);
@@ -298,7 +299,7 @@ export async function addChallenges(connection, data) {
         connection,
         'blocks',
         ['id', 'title', 'dashed_name'],
-        [block_id, block, block]
+        [block_id, getBlockTitle(block), block]
       );
       blockSet.add(block);
       block_to_block_id_map.set(block, block_id);
@@ -311,6 +312,14 @@ export async function addChallenges(connection, data) {
         [block_id, time]
       );
 
+      const superblockId = superblock_to_superblock_id_map.get(superBlock);
+      await insert(
+        connection,
+        'superblocks_blocks',
+        ['superblock_id', 'block_id', 'block_order'],
+        [superblockId, block_id, order]
+      );
+
       block_id += 1;
     }
 
@@ -320,20 +329,6 @@ export async function addChallenges(connection, data) {
       ['id', 'title', 'object_id', 'dashed_name'],
       [c, title, id, dashedName]
     );
-
-    if (
-      superblock_to_superblock_id_map.get(superBlock) &&
-      !block_to_block_id_map.get(block)
-    ) {
-      const superblockId = superblock_to_superblock_id_map.get(superBlock);
-      const blockId = block_to_block_id_map.get(block);
-      await insert(
-        connection,
-        'superblocks_blocks',
-        ['superblock_id', 'block_id', 'block_order'],
-        [superblockId, blockId, order]
-      );
-    }
 
     if (block_to_block_id_map.get(block)) {
       const blockId = block_to_block_id_map.get(block);
