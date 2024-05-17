@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS superblocks_blocks;
 DROP TABLE IF EXISTS template;
 DROP TABLE IF EXISTS tests;
 DROP TABLE IF EXISTS title;
+DROP TABLE IF EXISTS uses_multifile_editor;
 DROP TABLE IF EXISTS video_id;
 DROP TABLE IF EXISTS video_locale_ids;
 DROP TABLE IF EXISTS video_url;
