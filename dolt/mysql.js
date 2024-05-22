@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises';
 import { createConnection } from 'mysql';
 import {
   getTableName,
@@ -20,152 +21,11 @@ export async function withConnection(connectionString, callback) {
 }
 
 export async function seed(connection) {
-  let sql = `
-CREATE TABLE IF NOT EXISTS certifications(
-  id INT NOT NULL AUTO_INCREMENT,
-  title TEXT NOT NULL,
-  object_id VARCHAR(24) NOT NULL,
-  dashed_name TEXT NOT NULL,
-  state ENUM('current','upcoming','legacy') NOT NULL,
-  PRIMARY KEY (id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS certifications_prerequisites(
-  certification_id INT NOT NULL,
-  prerequisite_object_id VARCHAR(24) NOT NULL,
-  PRIMARY KEY (certification_id, prerequisite_object_id),
-  FOREIGN KEY (certification_id) REFERENCES certifications(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS superblocks(
-  id INT NOT NULL AUTO_INCREMENT,
-  title TEXT NOT NULL,
-  dashed_name TEXT NOT NULL,
-  superblock_order INT NOT NULL,
-  PRIMARY KEY (id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS blocks(
-  id INT NOT NULL AUTO_INCREMENT,
-  title TEXT NOT NULL,
-  dashed_name TEXT NOT NULL,
-  PRIMARY KEY (id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS superblocks_blocks(
-  superblock_id INT NOT NULL,
-  block_id INT NOT NULL,
-  block_order int NOT NULL,
-  PRIMARY KEY (superblock_id, block_id),
-  FOREIGN KEY (superblock_id) REFERENCES superblocks(id),
-  FOREIGN KEY (block_id) REFERENCES blocks(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS challenges (
-  id INT NOT NULL AUTO_INCREMENT,
-  title TEXT NOT NULL,
-  object_id VARCHAR(24) NOT NULL,
-  dashed_name TEXT NOT NULL,
-  PRIMARY KEY (id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS blocks_challenges(
-  block_id INT NOT NULL,
-  challenge_id INT NOT NULL,
-  challenge_order int NOT NULL,
-  PRIMARY KEY (block_id, challenge_id),
-  FOREIGN KEY (block_id) REFERENCES blocks(id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS block_time_to_complete(
-  id INT NOT NULL AUTO_INCREMENT,
-  block_id INT NOT NULL,
-  time_to_complete TEXT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (block_id) REFERENCES blocks(id)
-)`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-  CREATE TABLE IF NOT EXISTS block_is_upcoming(
-    id INT NOT NULL AUTO_INCREMENT,
-    block_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (block_id) REFERENCES blocks(id)
-  )`;
-  await runCreateTable(connection, sql);
-
-  // Additional feature tables to replace challengeTypes
-  sql = `
-CREATE TABLE IF NOT EXISTS app_url(
-  id INT AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  required BOOLEAN NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS source_code_url(
-  id INT AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  required BOOLEAN NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS local_address_allowed(
-  id INT AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS editor_address_allowed(
-  id INT AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-CREATE TABLE IF NOT EXISTS display_preview_modal(
-  id INT AUTO_INCREMENT,
-  challenge_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-);`;
-  await runCreateTable(connection, sql);
-
-  sql = `
-  CREATE TABLE IF NOT EXISTS uses_multifile_editor(
-    id INT AUTO_INCREMENT,
-    challenge_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (challenge_id) REFERENCES challenges(id)
-  );`;
-  await runCreateTable(connection, sql);
+  const sql = await readFile('./queries/seed.sql', 'utf8');
+  const queries = sql.split(';\n\n');
+  for (const query of queries) {
+    await runCreateTable(connection, query);
+  }
 }
 
 export async function createTables(connection, data) {
