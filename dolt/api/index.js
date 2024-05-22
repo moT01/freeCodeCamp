@@ -213,8 +213,10 @@ async function fetchCurriculumFromDB() {
 
 fetchCurriculumFromDB();
 
+// TODO: Add logic for fetching specific language
 app.get('/curriculum', (req, res) => {
-  console.log('Someone is trying to get the curriculum!');
+  const { lang = 'english' } = req.query;
+  console.log(`Someone is trying to get the ${lang} curriculum!`);
   res.json(curriculum);
 });
 
