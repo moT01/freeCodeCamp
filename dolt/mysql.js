@@ -135,6 +135,7 @@ export async function addChallenges(connection, data) {
   const feature_table_ids = {};
   let block_id = 1;
   let superblock_id = 1;
+  let block_time_to_complete_id = 1;
   let block_is_upcoming_id = 1;
   let uses_multifile_editor_id = 1;
   let c = 1;
@@ -190,12 +191,14 @@ export async function addChallenges(connection, data) {
       block_to_block_id_map.set(block, block_id);
 
       // Add `block_time_to_complete` and `block_is_upcoming` as special case, because it is per-block
-      await insert(
-        connection,
-        'block_time_to_complete',
-        ['id', 'block_id', 'time_to_complete'],
-        [block_id, block_id, time]
-      );
+      if (time) {
+        await insert(
+          connection,
+          'block_time_to_complete',
+          ['id', 'block_id', 'time_to_complete'],
+          [block_time_to_complete_id++, block_id, time]
+        );
+      }
 
       if (getBlockIsUpcoming(block)) {
         await insert(
