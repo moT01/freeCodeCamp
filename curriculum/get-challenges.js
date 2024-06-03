@@ -17,6 +17,7 @@ const {
 const { isAuditedSuperBlock } = require('../shared/utils/is-audited');
 const { createPoly } = require('../shared/utils/polyvinyl');
 const { getSuperOrder, getSuperBlockFromDir } = require('./utils');
+const { metaSchemaValidator } = require('./schema/meta-schema');
 
 // const { compareCDBToFS } = require('./capi-connector');
 
@@ -173,17 +174,14 @@ async function buildBlocks({ basename: blockName }, curriculum, superBlock) {
   } else {
     const blockMeta = JSON.parse(fs.readFileSync(metaPath));
 
-    const { isUpcomingChange, helpCategory } = blockMeta;
-
-    if (typeof isUpcomingChange !== 'boolean') {
+    const validateMeta = metaSchemaValidator(blockMeta);
+    if (validateMeta.error) {
       throw Error(
-        `meta file at ${metaPath} is missing 'isUpcomingChange', it must be 'true' or 'false'`
+        `${validateMeta.error} in meta.json for block '${blockName}'`
       );
     }
 
-    if (!helpCategory) {
-      throw Error(`meta file at ${metaPath} is missing 'helpCategory'`);
-    }
+    const { isUpcomingChange } = blockMeta;
 
     if (!isUpcomingChange || process.env.SHOW_UPCOMING_CHANGES === 'true') {
       // add the block to the superBlock
@@ -248,11 +246,6 @@ function generateChallengeCreator(lang, englishPath, i18nPath) {
       meta.challengeOrder,
       ({ id }) => id === challenge.id
     );
-
-    if (!meta.dashedName)
-      throw Error(
-        `The 'meta.json' file for the block with challenge '${challenge.title}' has no 'dashedName' property`
-      );
 
     challenge.block = meta.dashedName;
     challenge.hasEditableBoundaries = !!meta.hasEditableBoundaries;
