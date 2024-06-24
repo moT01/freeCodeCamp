@@ -49,11 +49,11 @@ const linkSpacingStyle = {
   gap: '15px'
 };
 
-const coreCurriculum = [
-  ...superBlockOrder[SuperBlockStages.FrontEnd],
-  ...superBlockOrder[SuperBlockStages.Backend],
-  ...superBlockOrder[SuperBlockStages.Python]
-];
+// const coreCurriculum = [
+//   ...superBlockOrder[SuperBlockStages.FrontEnd],
+//   ...superBlockOrder[SuperBlockStages.Backend],
+//   ...superBlockOrder[SuperBlockStages.Python]
+// ];
 
 const mapStateToProps = createSelector(
   isSignedInSelector,
@@ -172,7 +172,32 @@ function Map({
         {t('landing.core-certs-heading')}
       </h2>
       <ul>
-        {coreCurriculum.map((superBlock, i) => (
+      <li
+        data-test-label='curriculum-map-button'
+        data-playwright-test-label='curriculum-map-button'
+      >
+        <div className='progress-icon-wrapper'>
+          <div
+            className={'progress-icon'}
+          >
+            <RibbonIcon
+              value={1}
+              showNumbers={false}
+              isCompleted={false}
+              isClaimed={false}
+            />
+          </div>
+        </div>
+
+        <Link className='btn link-btn btn-lg' to={`/learn/${SuperBlocks.FrontEndDevelopment}`}>
+          <div style={linkSpacingStyle}>
+            <SuperBlockIcon className='map-icon' superBlock={SuperBlocks.FrontEndDevelopment} />
+            {getSuperBlockTitleForMap(SuperBlocks.FrontEndDevelopment)}
+          </div>
+          {forLanding && <LinkButton />}
+        </Link>
+      </li>
+        {/* {coreCurriculum.map((superBlock, i) => (
           <MapLi
             key={i}
             superBlock={superBlock}
@@ -183,7 +208,7 @@ function Map({
             showNumbers={true}
             completed={allSuperblockChallengesCompleted(superBlock)}
           />
-        ))}
+        ))} */}
       </ul>
       <Spacer size='medium' />
       <h2 className={forLanding ? 'big-heading' : ''}>

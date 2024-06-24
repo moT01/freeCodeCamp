@@ -383,6 +383,31 @@ a.map-grid-item.challenge-completed {
   background-color: var(--highlight-background);
 }
 
+.Workshop-tag {
+  color: #4DBDC4;
+  background-color: #9CE0E1;
+}
+
+.Lecture-tag {
+  color: #7D6DAB;
+  background-color: #BAAED5;
+}
+
+.Lab-tag {
+  color: #D6693C;
+  background-color: #F7B77E;
+}
+
+.Quiz-tag {
+  color: #3C8DBC;
+  background-color: #7FB4E3;
+}
+
+.Exam-tag {
+  color: #E83C8D;
+  background-color: #F3A5D9;
+}
+
 .block-grid {
   border-bottom: 4px solid var(--secondary-background);
 }

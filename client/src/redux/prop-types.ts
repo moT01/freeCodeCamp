@@ -2,6 +2,7 @@ import { HandlerProps } from 'react-reflex';
 import { SuperBlocks } from '../../../shared/config/superblocks';
 import { Themes } from '../components/settings/theme';
 import { type CertTitle } from '../../config/cert-and-project-map';
+import { BlockTypes } from '../../../shared/config/blocks';
 
 export type Steps = {
   isHonest?: boolean;
@@ -178,6 +179,7 @@ export type ChallengeWithCompletedNode = {
 export type ChallengeNode = {
   challenge: {
     block: string;
+    blockType: BlockTypes;
     certification: string;
     challengeOrder: number;
     challengeType: number;

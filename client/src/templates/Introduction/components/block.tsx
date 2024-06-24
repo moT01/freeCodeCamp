@@ -7,6 +7,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
 import { SuperBlocks } from '../../../../../shared/config/superblocks';
+import { BlockTypes } from '../../../../../shared/config/blocks';
 import envData from '../../../../config/env.json';
 import { isAuditedSuperBlock } from '../../../../../shared/utils/is-audited';
 import Caret from '../../../assets/icons/caret';
@@ -47,6 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 interface BlockProps {
   blockDashedName: string;
+  blockType: BlockTypes;
   challenges: ChallengeNode[];
   completedChallengeIds: string[];
   isExpanded: boolean;
@@ -90,6 +92,7 @@ class Block extends Component<BlockProps> {
   render(): JSX.Element {
     const {
       blockDashedName,
+      blockType,
       completedChallengeIds,
       challenges,
       isExpanded,
@@ -153,8 +156,16 @@ class Block extends Component<BlockProps> {
         {' '}
         <ScrollableAnchor id={blockDashedName}>
           <div className={`block ${isExpanded ? 'open' : ''}`}>
+            {blockType && (
+              <div className='tags-wrapper'>
+                <span className={`cert-tag ${blockType}-tag`} aria-hidden='true'>
+                  {blockType}
+                </span>
+              </div>
+            )}
             <div className='block-header'>
               <h3 className='big-block-title'>{blockTitle}</h3>
+
               {!isAudited && (
                 <div className='block-cta-wrapper'>
                   <Link
@@ -209,6 +220,13 @@ class Block extends Component<BlockProps> {
       <>
         <ScrollableAnchor id={blockDashedName}>
           <div className='block'>
+            {blockType && (
+              <div className='tags-wrapper'>
+                <span className={`cert-tag ${blockType}-tag`} aria-hidden='true'>
+                  {blockType}
+                </span>
+              </div>
+            )}
             <div className='block-header'>
               <h3 className='big-block-title'>{blockTitle}</h3>
               {!isAudited && (
@@ -247,6 +265,13 @@ class Block extends Component<BlockProps> {
         {' '}
         <ScrollableAnchor id={blockDashedName}>
           <div className={`block block-grid ${isExpanded ? 'open' : ''}`}>
+          {blockType && (
+              <div className='tags-wrapper'>
+                <span className={`cert-tag ${blockType}-tag`} aria-hidden='true'>
+                  {blockType}
+                </span>
+              </div>
+            )}
             <h3 className='block-grid-title'>
               <button
                 aria-expanded={isExpanded ? 'true' : 'false'}

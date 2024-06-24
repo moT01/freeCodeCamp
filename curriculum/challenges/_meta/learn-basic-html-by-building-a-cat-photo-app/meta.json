@@ -1,0 +1,25 @@
+{
+  "name": "Learn Basic HTML by Building a Cat Photo App",
+  "blockType": "Workshop",
+  "isUpcomingChange": true,
+  "usesMultifileEditor": true,
+  "hasEditableBoundaries": true,
+  "dashedName": "learn-basic-html-by-building-a-cat-photo-app",
+  "helpCategory": "HTML-CSS",
+  "order": 0,
+  "superBlock": "front-end-development",
+  "challengeOrder": [
+    {
+      "id": "5ef9b03c81a63668521804ec",
+      "title": "Step 1"
+    },
+    {
+      "id": "5ef9b03c81a63668521804ee",
+      "title": "Step 2"
+    },
+    {
+      "id": "62bb4009e3458a128ff57d5d",
+      "title": "Step 3"
+    }
+  ]
+}

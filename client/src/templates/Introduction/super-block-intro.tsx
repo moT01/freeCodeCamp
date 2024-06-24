@@ -1,6 +1,6 @@
 import { WindowLocation } from '@reach/router';
 import { graphql } from 'gatsby';
-import { uniq } from 'lodash-es';
+// import { uniq } from 'lodash-es';
 import React, { Fragment, useEffect, memo } from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation, withTranslation } from 'react-i18next';
@@ -26,6 +26,7 @@ import {
   signInLoadingSelector
 } from '../../redux/selectors';
 import { MarkdownRemark, AllChallengeNode, User } from '../../redux/prop-types';
+import { BlockTypes } from '../../../../shared/config/blocks';
 import Block from './components/block';
 import CertChallenge from './components/cert-challenge';
 import LegacyLinks from './components/legacy-links';
@@ -175,12 +176,27 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   } = props;
 
   const nodesForSuperBlock = edges.map(({ node }) => node);
-  const blockDashedNames = uniq(
-    nodesForSuperBlock.map(({ challenge: { block } }) => block)
-  );
+  // const blockDashedNames = uniq(
+  //   nodesForSuperBlock.map(({ challenge: { block } }) => block)
+  // );
+
+  // console.log(nodesForSuperBlock);
+
+  const blocksAdded = new Set();
+  const blockDashedNames: { block: string; blockType: BlockTypes }[] = [];
+
+  nodesForSuperBlock.forEach(challenge => {
+    const { block, blockType } = challenge.challenge;
+    if (!blocksAdded.has(block)) {
+      blocksAdded.add(block);
+      blockDashedNames.push({ block, blockType });
+    }
+  });
+
+  console.log(blockDashedNames);
 
   const i18nTitle = getSuperBlockTitleForMap(superBlock);
-  const defaultCurriculumNames = blockDashedNames;
+  // const defaultCurriculumNames = blockDashedNames;
 
   const superblockWithoutCert = [
     SuperBlocks.RespWebDesign,
@@ -224,12 +240,13 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
               </h2>
               <Spacer size='medium' />
               <div className='block-ui'>
-                {defaultCurriculumNames.map(blockDashedName => (
+                {blockDashedNames.map(({ block, blockType }) => (
                   <Block
-                    key={blockDashedName}
-                    blockDashedName={blockDashedName}
+                    key={block}
+                    blockDashedName={block}
+                    blockType={blockType}
                     challenges={nodesForSuperBlock.filter(
-                      node => node.challenge.block === blockDashedName
+                      node => node.challenge.block === block
                     )}
                     superBlock={superBlock}
                   />
@@ -303,6 +320,7 @@ export const query = graphql`
             }
             id
             block
+            blockType
             challengeType
             title
             order

@@ -1,0 +1,16 @@
+{
+  "name": "Survey Form",
+  "blockType": "Lab",
+  "isUpcomingChange": true,
+  "dashedName": "survey-form",
+  "usesMultifileEditor": true,
+  "helpCategory": "HTML-CSS",
+  "order": 2,
+  "superBlock": "front-end-development",
+  "challengeOrder": [
+    {
+      "id": "587d78af367417b2b2512b03",
+      "title": "Build a Survey Form"
+    }
+  ]
+}

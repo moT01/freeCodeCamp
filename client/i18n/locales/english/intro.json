@@ -1675,15 +1675,31 @@
   },
   "front-end-development": {
     "title": "Front End Development",
-    "intro": ["placeholder"],
+    "intro": ["The comprehensive curricula to become a Web Developer."],
     "blocks": {
-      "learn-basic-html-by-building-a-recipe-page": {
-        "title": "Learn Basic HTML by Building a Recipe Page",
-        "intro": ["", ""]
+      "learn-basic-html-by-building-a-cat-photo-app": {
+        "title": "Learn Basic HTML by Building a Cat Photo App",
+        "intro": [
+          "Learn HTML syntax while creating a simple web app with these interactive lessons."
+        ]
+      },
+      "html-fundamentals": {
+        "title": "HTML Fundamentals",
+        "intro": ["Learn fundamental HTML from these freeCodeCamp experts."]
+      },
+      "survey-form": {
+        "title": "Survey Form",
+        "intro": ["Practice what you've learned by building a survey form."]
+      },
+      "basic-html-quiz": {
+        "title": "Basic HTML Quiz",
+        "intro": ["Find out if you've mastered the basics of HTML."]
       },
       "front-end-development-certification-exam": {
         "title": "Front End Development Certification Exam",
-        "intro": ["", ""]
+        "intro": [
+          "Pass the certification exam to be able to claim your Front End Development Certification."
+        ]
       }
     }
   },

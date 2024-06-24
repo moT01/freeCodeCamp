@@ -46,7 +46,8 @@ const schema = Joi.object()
       'Odin',
       'Euler',
       'Rosetta'
-    ).required()
+    ).required(),
+    blockType: Joi.valid('Workshop', 'Lab', 'Lecture', 'Quiz', 'Exam')
   })
   // this makes sure there is no unknown key in the object
   .unknown(false);
