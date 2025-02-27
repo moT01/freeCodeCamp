@@ -114,7 +114,7 @@ export interface EditorProps {
     editorValue: string;
     editableRegionBoundaries?: number[];
   }) => void;
-  usesMultifileEditor: boolean;
+  usesMultifileEditor?: boolean;
   isChallengeCompleted: boolean;
 }
 
@@ -335,7 +335,7 @@ const Editor = (props: EditorProps): JSX.Element => {
   };
 
   const editorWillMount = (monaco: typeof monacoEditor) => {
-    const { challengeFiles, fileKey, usesMultifileEditor } = props;
+    const { challengeFiles, fileKey, usesMultifileEditor = false } = props;
 
     monacoRef.current = monaco;
     defineMonacoThemes(monaco, { usesMultifileEditor });

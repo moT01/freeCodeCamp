@@ -51,7 +51,7 @@ export type FillInTheBlank = {
 
 export type Fields = {
   slug: string;
-  blockHashSlug: string;
+  blockHashSlug?: string;
   blockName: string;
   tests: Test[];
 };
@@ -155,26 +155,26 @@ export interface PrerequisiteChallenge {
 export type ChallengeNode = {
   challenge: {
     block: string;
-    blockType: BlockTypes;
-    blockLayout: BlockLayouts;
-    certification: string;
-    challengeOrder: number;
+    blockType?: BlockTypes;
+    blockLayout?: BlockLayouts;
+    certification?: string;
+    challengeOrder?: number;
     challengeType: number;
     dashedName: string;
-    demoType: 'onClick' | 'onLoad' | null;
+    demoType?: 'onClick' | 'onLoad' | null;
     description: string;
     challengeFiles: ChallengeFiles;
-    explanation: string;
+    explanation?: string;
     fields: Fields;
-    fillInTheBlank: FillInTheBlank;
-    forumTopicId: number;
-    guideUrl: string;
-    head: string[];
-    hasEditableBoundaries: boolean;
+    fillInTheBlank?: FillInTheBlank;
+    forumTopicId?: number;
+    guideUrl?: string;
+    head?: string[];
+    hasEditableBoundaries?: boolean;
     helpCategory: string;
     id: string;
-    instructions: string;
-    isComingSoon: boolean;
+    instructions?: string;
+    isComingSoon?: boolean;
     internal?: {
       content: string;
       contentDigest: string;
@@ -185,35 +185,35 @@ export type ChallengeNode = {
       owner: string;
       type: string;
     };
-    msTrophyId: string;
-    notes: string;
-    prerequisites: PrerequisiteChallenge[];
-    isLocked: boolean;
-    isPrivate: boolean;
-    order: number;
-    questions: Question[];
-    quizzes: Quiz[];
-    assignments: string[];
-    required: Required[];
-    scene: FullScene;
-    solutions: {
+    msTrophyId?: string;
+    notes?: string;
+    prerequisites?: PrerequisiteChallenge[];
+    isLocked?: boolean;
+    isPrivate?: boolean;
+    order?: number;
+    questions?: Question[];
+    quizzes?: Quiz[];
+    assignments?: string[];
+    required?: Required[];
+    scene?: FullScene;
+    solutions?: {
       [T in FileKey]: FileKeyChallenge;
     };
-    sourceInstanceName: string;
-    superOrder: number;
+    sourceInstanceName?: string;
+    superOrder?: number;
     superBlock: SuperBlocks;
-    tail: string[];
-    template: string;
-    tests: Test[];
+    tail?: string[];
+    template?: string;
+    tests?: Test[];
     title: string;
-    transcript: string;
-    translationPending: boolean;
-    url: string;
-    usesMultifileEditor: boolean;
-    videoId: string;
+    transcript?: string;
+    translationPending?: boolean;
+    url?: string;
+    usesMultifileEditor?: boolean;
+    videoId?: string;
     videoLocaleIds?: VideoLocaleIds;
     bilibiliIds?: BilibiliIds;
-    videoUrl: string;
+    videoUrl?: string;
     chapter?: string;
     module?: string;
   };
@@ -392,14 +392,14 @@ export type FileKey =
 export type ChallengeMeta = {
   block: string;
   id: string;
-  introPath: string;
-  isFirstStep: boolean;
-  superBlock: SuperBlocks;
+  introPath?: string;
+  isFirstStep?: boolean;
+  superBlock?: SuperBlocks;
   title?: string;
   challengeType?: number;
-  helpCategory: string;
+  helpCategory?: string;
   disableLoopProtectTests: boolean;
-  disableLoopProtectPreview: boolean;
+  disableLoopProtectPreview?: boolean;
 } & NavigationPaths;
 
 export type NavigationPaths = {

@@ -113,8 +113,8 @@ interface ShowClassicProps extends Pick<PreviewProps, 'previewMounted'> {
   output: string[];
   pageContext: {
     challengeMeta: ChallengeMeta;
-    projectPreview: {
-      challengeData: ChallengeData;
+    projectPreview?: {
+      challengeData?: ChallengeData;
     };
   };
   updateChallengeMeta: (arg0: ChallengeMeta) => void;
@@ -195,21 +195,21 @@ function ShowClassic({
         instructions,
         fields: { tests, blockName },
         challengeType,
-        hasEditableBoundaries,
+        hasEditableBoundaries = undefined,
         superBlock,
         helpCategory,
-        forumTopicId,
-        usesMultifileEditor,
-        notes,
-        videoUrl,
-        translationPending
+        forumTopicId = undefined,
+        usesMultifileEditor = undefined,
+        notes = undefined,
+        videoUrl = undefined,
+        translationPending = undefined
       }
     }
   },
   pageContext: {
     challengeMeta,
     challengeMeta: { isFirstStep, nextChallengePath },
-    projectPreview: { challengeData }
+    projectPreview: { challengeData = undefined } = { challengeData: undefined }
   },
   createFiles,
   cancelTests,

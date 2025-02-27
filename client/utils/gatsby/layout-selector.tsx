@@ -20,7 +20,9 @@ export default function layoutSelector({
     location: { pathname }
   } = props;
 
-  const isChallenge = !!props.pageContext?.challengeMeta;
+  const isChallenge =
+    !!props.pageContext?.challengeMeta ||
+    props.location.pathname === '/learn/daily-coding-challenge';
 
   if (element.type === FourOhFourPage) {
     return (

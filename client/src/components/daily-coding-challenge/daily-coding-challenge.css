@@ -10,7 +10,7 @@
 .daily-coding-challenge-right {
   flex-grow: 1;
   border: 2px solid var(--primary-color);
-  padding: 2rem
+  padding: 2rem;
 }
 
 .daily-coding-challenge-info {
