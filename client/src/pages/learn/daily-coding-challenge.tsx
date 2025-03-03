@@ -7,7 +7,7 @@ const props = {
     challengeNode: {
       challenge: {
         // dashedName: 'problem-1-multiples-of-3-or-5',
-        block: 'project-euler-problems-1-to-100',
+        // block: 'project-euler-problems-1-to-100', // don't need
         // demoType: null,
         title: 'Problem 1: Multiples of 3 or 5',
         description:
@@ -22,7 +22,7 @@ const props = {
         // translationPending: false,
         // forumTopicId: 301722,
         fields: {
-          blockName: 'project-euler-problems-1-to-100',
+          blockName: 'daily-coding-challenge', // don't need
           // slug: '/learn/project-euler/project-euler-problems-1-to-100/problem-1-multiples-of-3-or-5',
           tests: [
             {
@@ -66,7 +66,7 @@ const props = {
       disableLoopProtectTests: true,
       // disableLoopProtectPreview: false,
       // superBlock: 'project-euler',
-      block: 'project-euler-problems-1-to-100',
+      // block: 'project-euler-problems-1-to-100', // don't need
       // isFirstStep: true,
       // template: null,
       // required: [],
@@ -75,7 +75,7 @@ const props = {
       //   '/learn/project-euler/project-euler-problems-1-to-100/problem-2-even-fibonacci-numbers',
       // prevChallengePath:
       //   '/learn/coding-interview-prep/take-home-projects/build-a-light-bright-app',
-      id: '5900f36e1000cf542c50fe80'
+      id: '5900f36e1000cf542c50fe80' // don't need cause we have it? or do we - lets keep it for now. Seems like we need it for the page/challenge meta to submit
     }
     // projectPreview: {
     //   challengeData: {

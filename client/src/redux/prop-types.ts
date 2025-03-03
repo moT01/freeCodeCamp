@@ -390,7 +390,7 @@ export type FileKey =
   | 'indexjsx';
 
 export type ChallengeMeta = {
-  block: string;
+  block?: string;
   id: string;
   introPath?: string;
   isFirstStep?: boolean;
