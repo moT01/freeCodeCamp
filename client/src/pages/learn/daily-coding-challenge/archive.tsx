@@ -1,9 +1,65 @@
+import { graphql } from 'gatsby';
 import React from 'react';
+import { Container, Col, Row, Spacer } from '@freecodecamp/ui';
+import Map from '../../../components/Map';
+import { SuperBlocks } from '../../../../../shared/config/curriculum';
+import ArchiveBadges from '../../../components/daily-coding-challenge/archive-badges';
+import ArchiveCalendar from '../../../components/daily-coding-challenge/archive-calendar';
 
-function Archive(): JSX.Element {
-  return <div>Archive of all daily challenges</div>;
+interface DailyCodingChallengesArchivePageProps {
+  data: {
+    allChallengeNode: {
+      nodes: {
+        challenge: {
+          id: string;
+          superBlock: SuperBlocks;
+        };
+      }[];
+    };
+  };
+}
+
+function Archive({
+  data: {
+    allChallengeNode: { nodes: challengeNodes }
+  }
+}: DailyCodingChallengesArchivePageProps): JSX.Element {
+  return (
+    <Container>
+      <Row>
+        <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
+          <Spacer size='m' />
+          <h1 className='text-center'>Daily Coding Challenge Archive</h1>
+          <Spacer size='m' />
+          <ArchiveBadges />
+        </Col>
+        <Col md={12} sm={12} xs={12}>
+          <Spacer size='m' />
+          <ArchiveCalendar />
+        </Col>
+        <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
+          <Spacer size='l' />
+          <Map allChallenges={challengeNodes.map(node => node.challenge)} />
+          <Spacer size='l' />
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 Archive.displayName = 'Archive';
 
 export default Archive;
+
+export const query = graphql`
+  query DailyCodingChallengesArchivePageQuery {
+    allChallengeNode {
+      nodes {
+        challenge {
+          id
+          superBlock
+        }
+      }
+    }
+  }
+`;

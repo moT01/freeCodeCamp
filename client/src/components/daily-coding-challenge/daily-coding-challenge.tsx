@@ -20,6 +20,7 @@ function DailyCodingChallenge({
   // Midnight US Central Time is used to determine the release of new daily challenges
   const todaysDate = new Date();
 
+  // format "dd-mm-yyyy" - e.g. "02-28-2025"
   const usCentralDateForApi = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Chicago',
     month: '2-digit',
@@ -29,6 +30,7 @@ function DailyCodingChallenge({
     .format(todaysDate)
     .replace(/\//g, '-');
 
+  // format "weekday, shortMonth day" e.g. "Friday, Feb 28"
   const usCentralDateForDisplay = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Chicago',
     weekday: 'long',
