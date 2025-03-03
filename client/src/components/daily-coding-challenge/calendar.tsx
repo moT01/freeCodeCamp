@@ -2,7 +2,7 @@ import React from 'react';
 import { Spacer } from '@freecodecamp/ui';
 import CalendarDay from './calendar-day';
 
-import './archive-calendar.css';
+import './calendar.css';
 
 // const dailyChallengeData = [
 //   {
@@ -94,7 +94,7 @@ const yearNumber = parseInt(year, 10);
 const monthIndex = parseInt(monthNumber, 10) - 1; // JS months are 0-based
 const daysInMonth = new Date(yearNumber, monthIndex + 1, 0).getDate();
 
-function ArchiveCalendar(): JSX.Element {
+function DailyCodingChallengeCalendar(): JSX.Element {
   const days: JSX.Element[] = [];
   for (let i = 0; i <= dayOfWeekNumber; i++) {
     days.push(<CalendarDay key={i} dayNumber={0} />);
@@ -105,14 +105,14 @@ function ArchiveCalendar(): JSX.Element {
       <CalendarDay
         key={day}
         dayNumber={day}
-        isComplete={day > 20}
+        isCompleted={day > 20}
         isAvailable={true}
       />
     );
   }
 
   return (
-    <div className='daily-coding-challenge-calendar'>
+    <>
       <h2 className='text-center'>{monthFull}</h2>
       <Spacer size='m' />
       <div className='calendar-weekday-labels'>
@@ -126,10 +126,10 @@ function ArchiveCalendar(): JSX.Element {
       </div>
       <Spacer size='s' />
       <div className='calendar-grid'>{days}</div>
-    </div>
+    </>
   );
 }
 
-ArchiveCalendar.displayName = 'ArchiveCalendar';
+DailyCodingChallengeCalendar.displayName = 'DailyCodingChallengeCalendar';
 
-export default ArchiveCalendar;
+export default DailyCodingChallengeCalendar;

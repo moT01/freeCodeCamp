@@ -1,11 +1,11 @@
 import React from 'react';
 import { RibbonIcon } from '../../assets/icons/completion-ribbon';
 
-import './archive-badges.css';
+import './status.css';
 
-function ArchiveBadges(): JSX.Element {
+function DailyCodingChallengeStatus(): JSX.Element {
   return (
-    <>
+    <div className='daily-coding-challenge-status'>
       <p>Daily Challenges Completed: 5</p>
       <p>Daily Challenge Status: Kindling Coder</p>
       <RibbonIcon
@@ -14,10 +14,10 @@ function ArchiveBadges(): JSX.Element {
         isCompleted={true}
         isClaimed={true}
       />
-    </>
+    </div>
   );
 }
 
-ArchiveBadges.displayName = 'ArchiveBadges';
+DailyCodingChallengeStatus.displayName = 'DailyCodingChallengeStatus';
 
-export default ArchiveBadges;
+export default DailyCodingChallengeStatus;

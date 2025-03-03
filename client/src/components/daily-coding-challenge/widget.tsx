@@ -4,16 +4,16 @@ import { Spacer, Button, Dropdown, MenuItem } from '@freecodecamp/ui';
 
 import { RibbonIcon } from '../../assets/icons/completion-ribbon';
 
-import './daily-coding-challenge.css';
+import './widget.css';
 
-interface DailyCodingChallengeProps
+interface DailyCodingChallengeWidgetProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   forLanding: boolean;
 }
 
-function DailyCodingChallenge({
+function DailyCodingChallengeWidget({
   forLanding
-}: DailyCodingChallengeProps): JSX.Element {
+}: DailyCodingChallengeWidgetProps): JSX.Element {
   const [difficulty, setDifficulty] = useState<string>('1');
   const { t } = useTranslation();
 
@@ -124,6 +124,6 @@ function DailyCodingChallenge({
   );
 }
 
-DailyCodingChallenge.displayName = 'DailyCodingChallenge';
+DailyCodingChallengeWidget.displayName = 'DailyCodingChallengeWidget';
 
-export default DailyCodingChallenge;
+export default DailyCodingChallengeWidget;

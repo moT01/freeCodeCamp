@@ -3,8 +3,8 @@ import React from 'react';
 import { Container, Col, Row, Spacer } from '@freecodecamp/ui';
 import Map from '../../../components/Map';
 import { SuperBlocks } from '../../../../../shared/config/curriculum';
-import ArchiveBadges from '../../../components/daily-coding-challenge/archive-badges';
-import ArchiveCalendar from '../../../components/daily-coding-challenge/archive-calendar';
+import DailyCodingChallengeStatus from '../../../components/daily-coding-challenge/status';
+import DailyCodingChallengeCalendar from '../../../components/daily-coding-challenge/calendar';
 
 interface DailyCodingChallengesArchivePageProps {
   data: {
@@ -29,13 +29,15 @@ function Archive({
       <Row>
         <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
           <Spacer size='m' />
-          <h1 className='text-center'>Daily Coding Challenge Archive</h1>
+          <h1 className='text-center'>Daily Coding Challenges</h1>
           <Spacer size='m' />
-          <ArchiveBadges />
+          <DailyCodingChallengeStatus />
+          <Spacer size='l' />
+          <h1 className='text-center'>Archive</h1>
         </Col>
         <Col md={12} sm={12} xs={12}>
           <Spacer size='m' />
-          <ArchiveCalendar />
+          <DailyCodingChallengeCalendar />
         </Col>
         <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
           <Spacer size='l' />
