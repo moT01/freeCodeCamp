@@ -22,7 +22,7 @@ const props = {
         // translationPending: false,
         // forumTopicId: 301722,
         fields: {
-          blockName: 'daily-coding-challenge', // don't need
+          blockName: 'project-euler-problems-1-to-100', // don't need
           // slug: '/learn/project-euler/project-euler-problems-1-to-100/problem-1-multiples-of-3-or-5',
           tests: [
             {

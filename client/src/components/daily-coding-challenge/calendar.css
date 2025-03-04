@@ -33,11 +33,11 @@
   color: var(--primary-background);
 }
 
-.calendar-day:hover svg *,
+/* .calendar-day:hover svg *,
 .calendar-day:active svg * {
   fill: orange;
   stroke: red;
-}
+} */
 
 .calendar-day-number {
   position: absolute;
@@ -45,7 +45,7 @@
   left: 5px;
 }
 
-.calendar-day > svg,
+.calendar-day svg,
 .empty-cirle {
   width: calc(10px + 2vw);
   height: calc(10px + 2vw);
