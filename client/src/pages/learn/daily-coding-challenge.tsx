@@ -3,6 +3,7 @@ import ShowClassic from '../../templates/Challenges/classic/show';
 import { Loader } from '../../components/helpers';
 import { Ext } from '../../redux/prop-types';
 import DailyCodingChallengeNotFound from '../../components/daily-coding-challenge/not-found';
+import { formatDateUsCentral } from '../../components/daily-coding-challenge/helpers';
 
 // python
 const props = {
@@ -155,6 +156,7 @@ const props = {
 */
 
 function isValidDate(dateString: string) {
+  console.log(`isValidDate? ${dateString}`);
   const regex = /^\d{2}-\d{2}-\d{4}$/;
   if (!regex.test(dateString)) return false;
 
@@ -169,63 +171,73 @@ function isValidDate(dateString: string) {
   );
 }
 
-function dateHasChallenge(firstDay, today, dateString: string) {
-  return dateString > today && dateString < firstDay;
-}
-
-function formatDateUsCentral(dateObj: Date) {
-  return dateObj
-    .toLocaleString('en-US', {
-      timeZone: 'America/Chicago',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    })
-    .replace(/\//g, '-');
+function dateHasChallenge(firstDay: string, today: string, dateString: string) {
+  console.log(`dateHasChallenge? ${dateString}`);
+  return dateString >= firstDay && dateString <= today;
 }
 
 function DailyCodingChallenge(): JSX.Element {
   // const [challengeData, setChallengeData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [challengeNotFound, setChallengeNotFound] = useState(false);
+  const [challengeFound, setChallengeFound] = useState(false);
 
   // dates in US Central time
   // firstDay is the first day a daily challenge became available
-  const firstDay = formatDateUsCentral(new Date('03-10-2025'));
+  const firstDay = formatDateUsCentral(new Date('03-08-2025'));
   const today = formatDateUsCentral(new Date());
 
   const dateParam = new URLSearchParams(window.location.search).get('date');
 
-  if (!dateParam || !isValidDate(dateParam) || !dateHasChallenge(firstDay, today, dateParam)) {
-    setChallengeNotFound(true);
-  }
+  const fetchChallenge = async (date: string) => {
+    try {
+      console.log('fetching challenge...');
+      const response = await fetch(
+        `http://localhost:3400/api/daily-challenge/date/${date}`
+      );
+      const result = await response.json();
+
+      // Validate challenge data
+      if (result) {
+        // && isChallengeValid(result)) {
+        console.log(result);
+        // setChallengeData(result);
+        // setChallengeFound(true);
+      } else {
+        setChallengeFound(false);
+        // setIsLoading(false);
+      }
+    } catch (error) {
+      setChallengeFound(false);
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://localhost:3400');
-        const result = await response.json();
-
-        // validate challenge data
-        //
-
-        setChallengeData(result);
-        setIsLoading(false);
-      } catch (error) {
-        setChallengeNotFound(true);
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
-      }
+    // If the date param is invalid, stop loading and show the not found page
+    if (
+      !dateParam ||
+      !isValidDate(dateParam) ||
+      !dateHasChallenge(firstDay, today, dateParam)
+    ) {
+      console.log('invalid date parameter');
+      setIsLoading(false);
+      setChallengeFound(false);
+      return;
     }
 
-    fetchData();
-  }, []);
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    fetchChallenge(dateParam);
+  }, [dateParam, firstDay, today]); // Ensure useEffect re-runs if these dependencies change
 
-  // console.log(challengeData);
-
-  return challengeNotFound ? <DailyCodingChallengeNotFound /> :
-  isLoading ? <Loader /> : <ShowClassic {...props} />;
+  return isLoading ? (
+    <Loader />
+  ) : !challengeFound ? (
+    <DailyCodingChallengeNotFound />
+  ) : (
+    <ShowClassic {...props} />
+  );
 }
 
 DailyCodingChallenge.displayName = 'DailyCodingChallenge';
