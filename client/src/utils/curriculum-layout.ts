@@ -13,7 +13,9 @@ const projectBasedChallengeTypes = [
   challengeTypes.codeAllyPractice,
   challengeTypes.multifilePythonCertProject,
   challengeTypes.lab,
-  challengeTypes.jsLab
+  challengeTypes.jsLab,
+  challengeTypes.dailyChallengeJs,
+  challengeTypes.dailyChallengePy
 ];
 
 export const isProjectBased = (
