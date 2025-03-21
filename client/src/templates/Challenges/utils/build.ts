@@ -108,7 +108,9 @@ export const buildFunctions = {
   [challengeTypes.python]: buildPythonChallenge,
   [challengeTypes.multifilePythonCertProject]: buildPythonChallenge,
   [challengeTypes.lab]: buildDOMChallenge,
-  [challengeTypes.jsLab]: buildJSChallenge
+  [challengeTypes.jsLab]: buildJSChallenge,
+  [challengeTypes.dailyChallengeJs]: buildJSChallenge,
+  [challengeTypes.dailyChallengePy]: buildPythonChallenge
 };
 
 export function canBuildChallenge(challengeData: BuildChallengeData): boolean {
@@ -136,7 +138,9 @@ const testRunners = {
   [challengeTypes.python]: getPyTestRunner,
   [challengeTypes.multifileCertProject]: getDOMTestRunner,
   [challengeTypes.multifilePythonCertProject]: getPyTestRunner,
-  [challengeTypes.lab]: getDOMTestRunner
+  [challengeTypes.lab]: getDOMTestRunner,
+  [challengeTypes.dailyChallengeJs]: getJSTestRunner,
+  [challengeTypes.dailyChallengePy]: getPyTestRunner
 };
 
 export function getTestRunner(
@@ -418,6 +422,7 @@ export function isJavaScriptChallenge({
   return (
     challengeType === challengeTypes.js ||
     challengeType === challengeTypes.jsProject ||
-    challengeType === challengeTypes.jsLab
+    challengeType === challengeTypes.jsLab ||
+    challengeType === challengeTypes.dailyChallengeJs
   );
 }

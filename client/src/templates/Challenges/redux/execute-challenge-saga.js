@@ -290,6 +290,7 @@ export function* previewChallengeSaga(action) {
         // is no need to update the preview frame.
         if (
           challengeData.challengeType === challengeTypes.python ||
+          challengeData.challengeType === challengeTypes.dailyChallengePy ||
           challengeData.challengeType ===
             challengeTypes.multifilePythonCertProject
         ) {
@@ -324,7 +325,8 @@ function* updatePreviewSaga(action) {
   const challengeData = yield select(challengeDataSelector);
   if (
     challengeData.challengeType === challengeTypes.python ||
-    challengeData.challengeType === challengeTypes.multifilePythonCertProject
+    challengeData.challengeType === challengeTypes.multifilePythonCertProject ||
+    challengeData.challengeType === challengeTypes.dailyChallengePy
   ) {
     yield updatePython(challengeData);
   } else {
