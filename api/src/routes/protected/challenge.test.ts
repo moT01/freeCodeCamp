@@ -1009,10 +1009,10 @@ describe('challengeRoutes', () => {
           await fastifyTestInstance.prisma.user.updateMany({
             where: { email: 'foo@bar.com' },
             data: {
-              completedDailyCodingChallenges: [],
               progressTimestamps: []
             }
           });
+          await fastifyTestInstance.prisma.dailyCodingChallenges.deleteMany({});
         });
 
         test('POST correctly handles multiple requests', async () => {

@@ -383,31 +383,59 @@ export const challengeRoutes: FastifyPluginCallbackTypebox = (
     },
     async (req, reply) => {
       const logger = fastify.log.child({ req });
-      logger.info(`User ${req.user?.id} submitted a daily coding challenge`);
+      const userId = req.user!.id;
+      logger.info(`User ${userId} submitted a daily coding challenge`);
 
       const { id, language } = req.body;
 
       const user = await fastify.prisma.user.findUniqueOrThrow({
-        where: { id: req.user?.id },
+        where: { id: userId },
         select: {
-          completedDailyCodingChallenges: true,
+          dailyCodingChallenges: true,
           progressTimestamps: true
         }
       });
 
-      const { completedDailyCodingChallenges, progressTimestamps = [] } = user;
-
+      const { dailyCodingChallenges, progressTimestamps = [] } = user;
       const points = getPoints(progressTimestamps as ProgressTimestamp[]);
-      const oldCompletedChallenge = completedDailyCodingChallenges.find(
-        c => c.id === id
-      );
+
+      if (!dailyCodingChallenges) {
+        const { completedDailyCodingChallenges } =
+          await fastify.prisma.dailyCodingChallenges.create({
+            data: {
+              userId: userId,
+              completedDailyCodingChallenges: [
+                {
+                  id,
+                  completedDate: Date.now(),
+                  languages: [language]
+                }
+              ]
+            }
+          });
+
+        const { completedDate } = completedDailyCodingChallenges[0]!;
+
+        reply.code(200);
+        return reply.send({
+          alreadyCompleted: false,
+          points,
+          completedDate,
+          completedDailyCodingChallenges
+        });
+      }
+
+      const oldCompletedChallenge =
+        dailyCodingChallenges?.completedDailyCodingChallenges?.find(
+          c => c.id === id
+        );
 
       const alreadyCompleted = !!oldCompletedChallenge;
       const languageAlreadyCompleted =
-        oldCompletedChallenge?.completedLanguages.includes(language);
+        oldCompletedChallenge?.languages?.includes(language);
 
       if (alreadyCompleted) {
-        const { completedDate, completedLanguages } = oldCompletedChallenge;
+        const { completedDate, languages } = oldCompletedChallenge;
 
         if (languageAlreadyCompleted) {
           // alreadyCompleted && languageAlreadyCompleted, no need to change anything in the database
@@ -415,25 +443,20 @@ export const challengeRoutes: FastifyPluginCallbackTypebox = (
             alreadyCompleted,
             points,
             completedDate,
-            completedDailyCodingChallenges
+            dailyCodingChallenges
           });
           return;
         } else {
           // alreadyCompleted && !languageAlreadyCompleted, add the language to the record
           const { completedDailyCodingChallenges } =
-            await fastify.prisma.user.update({
-              where: { id: req.user?.id },
-              select: {
-                completedDailyCodingChallenges: true
-              },
+            await fastify.prisma.dailyCodingChallenges.update({
+              where: { userId: req.user?.id },
               data: {
                 completedDailyCodingChallenges: {
                   updateMany: {
                     where: { id },
                     data: {
-                      completedLanguages: [
-                        ...new Set([...completedLanguages, language])
-                      ]
+                      languages: [...new Set([...languages, language])]
                     }
                   }
                 }
@@ -454,11 +477,11 @@ export const challengeRoutes: FastifyPluginCallbackTypebox = (
         const newCompletedChallenge = {
           id,
           completedDate: newCompletedDate,
-          completedLanguages: [language]
+          languages: [language]
         };
 
         const newCompletedChallenges = [
-          ...completedDailyCodingChallenges,
+          ...dailyCodingChallenges.completedDailyCodingChallenges,
           newCompletedChallenge
         ];
 

@@ -11,7 +11,6 @@ export const newUser = (email: string) => ({
   about: '',
   acceptedPrivacyTerms: false,
   completedChallenges: [],
-  completedDailyCodingChallenges: [],
   completedExams: [],
   quizAttempts: [],
   currentChallengeId: '',
