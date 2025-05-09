@@ -888,12 +888,38 @@ async function postDailyCodingChallengeCompleted(
         }
       });
 
-    const { completedDate } = completedDailyCodingChallenges[0]!;
+    const { completedDate } = completedDailyCodingChallenges.at(-1)!;
 
+    await this.prisma.$runCommandRaw({
+      update: 'user',
+      updates: [
+        {
+          q: { _id: { $oid: req.user?.id } },
+          u: {
+            $push: {
+              progressTimestamps: completedDate
+            }
+          },
+          multi: false
+        }
+      ]
+    });
+    // TODO: After normalization
+    // const { progressTimestamps } = await this.prisma.user.update({
+    //   where: { id: req.user?.id },
+    //   data: {
+    //     progressTimestamps: {
+    //       push: completedDate
+    //     }
+    //   },
+    //   select: {
+    //     progressTimestamps: true
+    //   }
+    // });
     reply.code(200);
     return reply.send({
       alreadyCompleted: false,
-      points,
+      points: points + 1,
       completedDate,
       completedDailyCodingChallenges
     });
@@ -913,13 +939,13 @@ async function postDailyCodingChallengeCompleted(
 
     if (languageAlreadyCompleted) {
       // alreadyCompleted && languageAlreadyCompleted, no need to change anything in the database
-      void reply.send({
+      return reply.send({
         alreadyCompleted,
         points,
         completedDate,
-        dailyCodingChallenges
+        completedDailyCodingChallenges:
+          dailyCodingChallenges.completedDailyCodingChallenges
       });
-      return;
     } else {
       // alreadyCompleted && !languageAlreadyCompleted, add the language to the record
       const { completedDailyCodingChallenges } =
@@ -936,13 +962,12 @@ async function postDailyCodingChallengeCompleted(
             }
           }
         });
-      void reply.send({
+      return reply.send({
         alreadyCompleted,
         points,
         completedDate,
         completedDailyCodingChallenges
       });
-      return;
     }
   } else {
     // !alreadyCompleted, add new record for completed challenge
@@ -964,15 +989,32 @@ async function postDailyCodingChallengeCompleted(
         }
       });
 
-    await this.prisma.user.update({
-      where: { id: req.user?.id },
-      data: {
-        progressTimestamps: {
-          push: newCompletedDate
+    await this.prisma.$runCommandRaw({
+      update: 'user',
+      updates: [
+        {
+          q: { _id: { $oid: userId } },
+          u: {
+            $push: {
+              progressTimestamps: newCompletedDate
+            }
+          },
+          multi: false
         }
-      }
+      ]
     });
-
+    // TODO: After normalization
+    // const { progressTimestamps } = await this.prisma.user.update({
+    //   where: { id: req.user?.id },
+    //   data: {
+    //     progressTimestamps: {
+    //       push: newCompletedDate
+    //     }
+    //   },
+    //   select: {
+    //     progressTimestamps: true
+    //   }
+    // });
     return reply.send({
       alreadyCompleted,
       points: points + 1,

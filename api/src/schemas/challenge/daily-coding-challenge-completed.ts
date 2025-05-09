@@ -8,7 +8,6 @@ const languages = Object.values(DailyCodingChallengeLanguage).map(k =>
 export const dailyCodingChallengeCompleted = {
   body: Type.Object({
     id: Type.String({ format: 'objectid', maxLength: 24, minLength: 24 }),
-    challengeType: Type.Number(),
     language: Type.Union(languages)
   }),
   response: {

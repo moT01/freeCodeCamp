@@ -5,6 +5,7 @@ const mockVerifyTrophyWithMicrosoft = jest.fn();
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { omit } from 'lodash';
 import { Static } from '@fastify/type-provider-typebox';
+import { DailyCodingChallengeLanguage } from '@prisma/client';
 
 import { challengeTypes } from '../../../../shared/config/challenge-types';
 import {
@@ -149,8 +150,7 @@ const updatedMultiFileCertProjectBody = {
 const dailyCodingChallengeId = '5900f36e1000cf542c50fe80';
 const dailyCodingChallengeBody = {
   id: dailyCodingChallengeId,
-  challengeType: 27,
-  language: 'javascript'
+  language: DailyCodingChallengeLanguage.JAVASCRIPT
 };
 
 describe('challengeRoutes', () => {
@@ -934,20 +934,6 @@ describe('challengeRoutes', () => {
           expect(response.statusCode).toBe(400);
         });
 
-        test('POST rejects requests without a challengeType', async () => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { challengeType, ...noChallengeTypeReqBody } =
-            dailyCodingChallengeBody;
-          const response = await superPost(
-            '/daily-coding-challenge-completed'
-          ).send(noChallengeTypeReqBody);
-
-          expect(response.body).toStrictEqual(
-            isValidChallengeCompletionErrorMsg
-          );
-          expect(response.statusCode).toBe(400);
-        });
-
         test('POST rejects requests without a language', async () => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { language, ...noLanguageReqBody } = dailyCodingChallengeBody;
@@ -967,20 +953,6 @@ describe('challengeRoutes', () => {
           ).send({
             ...dailyCodingChallengeBody,
             id: 'not-a-valid-id'
-          });
-
-          expect(response.body).toStrictEqual(
-            isValidChallengeCompletionErrorMsg
-          );
-          expect(response.statusCode).toBe(400);
-        });
-
-        test('POST rejects requests without valid challengeType', async () => {
-          const response = await superPost(
-            '/daily-coding-challenge-completed'
-          ).send({
-            ...dailyCodingChallengeBody,
-            challengeType: 'not-a-valid-challenge-type'
           });
 
           expect(response.body).toStrictEqual(
@@ -1023,11 +995,17 @@ describe('challengeRoutes', () => {
           ).send(dailyCodingChallengeBody);
 
           const user1 = await fastifyTestInstance.prisma.user.findFirstOrThrow({
-            where: { email: 'foo@bar.com' }
+            where: { email: 'foo@bar.com' },
+            select: {
+              dailyCodingChallenges: true,
+              progressTimestamps: true
+            }
           });
 
           const completedDate =
-            user1.completedDailyCodingChallenges[0]?.completedDate;
+            user1.dailyCodingChallenges?.completedDailyCodingChallenges.at(
+              -1
+            )?.completedDate;
 
           // should have correct completedDate
           expect(completedDate).toBeGreaterThanOrEqual(now);
@@ -1035,13 +1013,15 @@ describe('challengeRoutes', () => {
 
           expect(user1).toMatchObject({
             // should add completedDailyCodingChallenge to database with correct info
-            completedDailyCodingChallenges: [
-              {
-                id: dailyCodingChallengeId,
-                completedDate,
-                completedLanguages: ['javascript']
-              }
-            ],
+            dailyCodingChallenges: {
+              completedDailyCodingChallenges: [
+                {
+                  id: dailyCodingChallengeId,
+                  completedDate,
+                  languages: [DailyCodingChallengeLanguage.JAVASCRIPT]
+                }
+              ]
+            },
             // should add to progressTimestamps
             progressTimestamps: [completedDate]
           });
@@ -1056,7 +1036,7 @@ describe('challengeRoutes', () => {
               {
                 id: dailyCodingChallengeId,
                 completedDate,
-                completedLanguages: ['javascript']
+                languages: [DailyCodingChallengeLanguage.JAVASCRIPT]
               }
             ]
           });
@@ -1066,18 +1046,24 @@ describe('challengeRoutes', () => {
           ).send(dailyCodingChallengeBody);
 
           const user2 = await fastifyTestInstance.prisma.user.findFirstOrThrow({
-            where: { email: 'foo@bar.com' }
+            where: { email: 'foo@bar.com' },
+            select: {
+              dailyCodingChallenges: true,
+              progressTimestamps: true
+            }
           });
 
           // should not add 'javascript' again, should not update completedDate
           expect(user2).toMatchObject({
-            completedDailyCodingChallenges: [
-              {
-                id: dailyCodingChallengeId,
-                completedDate,
-                completedLanguages: ['javascript']
-              }
-            ],
+            dailyCodingChallenges: {
+              completedDailyCodingChallenges: [
+                {
+                  id: dailyCodingChallengeId,
+                  completedDate,
+                  languages: [DailyCodingChallengeLanguage.JAVASCRIPT]
+                }
+              ]
+            },
             // should not add to progressTimestamps
             progressTimestamps: [completedDate]
           });
@@ -1092,7 +1078,7 @@ describe('challengeRoutes', () => {
               {
                 id: dailyCodingChallengeId,
                 completedDate,
-                completedLanguages: ['javascript']
+                languages: [DailyCodingChallengeLanguage.JAVASCRIPT]
               }
             ]
           });
@@ -1101,22 +1087,31 @@ describe('challengeRoutes', () => {
             '/daily-coding-challenge-completed'
           ).send({
             ...dailyCodingChallengeBody,
-            language: 'python'
+            language: DailyCodingChallengeLanguage.PYTHON
           });
 
           const user3 = await fastifyTestInstance.prisma.user.findFirstOrThrow({
-            where: { email: 'foo@bar.com' }
+            where: { email: 'foo@bar.com' },
+            select: {
+              dailyCodingChallenges: true,
+              progressTimestamps: true
+            }
           });
 
           // should add 'python' to completedLanguages + should not update completedDate
           expect(user3).toMatchObject({
-            completedDailyCodingChallenges: [
-              {
-                id: dailyCodingChallengeId,
-                completedDate,
-                completedLanguages: ['javascript', 'python']
-              }
-            ],
+            dailyCodingChallenges: {
+              completedDailyCodingChallenges: [
+                {
+                  id: dailyCodingChallengeId,
+                  completedDate,
+                  languages: [
+                    DailyCodingChallengeLanguage.JAVASCRIPT,
+                    DailyCodingChallengeLanguage.PYTHON
+                  ]
+                }
+              ]
+            },
             // should not add to progressTimestamps
             progressTimestamps: [completedDate]
           });
@@ -1131,7 +1126,10 @@ describe('challengeRoutes', () => {
               {
                 id: dailyCodingChallengeId,
                 completedDate,
-                completedLanguages: ['javascript', 'python']
+                languages: [
+                  DailyCodingChallengeLanguage.JAVASCRIPT,
+                  DailyCodingChallengeLanguage.PYTHON
+                ]
               }
             ]
           });
