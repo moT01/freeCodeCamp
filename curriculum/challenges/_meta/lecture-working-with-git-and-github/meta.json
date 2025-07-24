@@ -1,0 +1,10 @@
+{
+  "name": "Working With Git and GitHub",
+  "blockType": "lecture",
+  "blockLayout": "challenge-list",
+  "isUpcomingChange": true,
+  "dashedName": "lecture-working-with-git-and-github",
+  "superBlock": "full-stack-developer",
+  "helpCategory": "Backend Development",
+  "challengeOrder": [{ "id": "68828e965f70137025ec5031", "title": "What Is Version Control, and Why Are These Systems Necessary?" }]
+}

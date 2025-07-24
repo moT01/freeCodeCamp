@@ -4670,7 +4670,10 @@
           "In this 40-lesson workshop, you will learn how to edit files in the terminal with Nano while building a castle."
         ]
       },
-      "rhhl": { "title": "328", "intro": [] },
+      "lecture-working-with-git-and-github": {
+        "title": "Working With Git and GitHub",
+        "intro": ["Learn how to work with Git and GitHub in these lectures."]
+      },
       "workshop-sql-reference-object": {
         "title": "Build an SQL Reference Object",
         "intro": [
