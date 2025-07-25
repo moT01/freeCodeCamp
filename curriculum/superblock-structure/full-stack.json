@@ -1518,7 +1518,10 @@
               "dashedName": "workshop-castle"
             },
             {
-              "dashedName": "lecture-working-with-git-and-github"
+              "dashedName": "lecture-introduction-to-git-and-github"
+            },
+            {
+              "dashedName": "lecture-working-with-code-reviews-branching-deployment-and-ci-cd"
             },
             {
               "dashedName": "workshop-sql-reference-object"
