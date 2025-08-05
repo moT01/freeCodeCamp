@@ -24,6 +24,10 @@
       "title": "What Is a Repository, and How Do You Create One?"
     },
     {
+      "id": "6882904fd7063f7258c0aef3",
+      "title": "How Do You Handle Security Requirements Like SSH and GPG Keys?"
+    },
+    {
       "id": "68829079ab2abe728a822cc1",
       "title": "How Do You Push a Local Repository to GitHub?"
     },
@@ -38,10 +42,6 @@
     {
       "id": "688290da3736c273009129d0",
       "title": "What Is a Pull Request, and How Do You Create One?"
-    },
-    {
-      "id": "6882904fd7063f7258c0aef3",
-      "title": "How Do You Handle Security Requirements Like SSH and GPG Keys?"
     }
   ]
 }
