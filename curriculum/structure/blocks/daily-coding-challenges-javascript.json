@@ -950,6 +950,18 @@
     {
       "id": "69b1028d6e265413d0198a2f",
       "title": "Challenge 236: Browser History"
+    },
+    {
+      "id": "69b559d2903b9e4afe9075f7",
+      "title": "Challenge 237: Equation Validation"
+    },
+    {
+      "id": "69b559d2903b9e4afe9075f8",
+      "title": "Challenge 238: Digit Rotation Escape"
+    },
+    {
+      "id": "69b559d2903b9e4afe9075f9",
+      "title": "Challenge 239: Placeholder"
     }
   ]
 }
