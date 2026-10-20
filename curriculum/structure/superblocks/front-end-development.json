@@ -58,6 +58,44 @@
             "lecture-introduction-to-css-variables",
             "workshop-magazine"
           ]
+        },
+        {
+          "dashedName": "javascript",
+          "blocks": [
+            "lecture-introduction-to-javascript-v2",
+            "workshop-greeting-bot",
+            "lecture-working-with-strings",
+            "workshop-teacher-chatbot",
+            "workshop-logic-checker-app",
+            "lecture-working-with-conditional-logic-and-math-methods-v2",
+            "workshop-mathbot",
+            "lab-fortune-teller",
+            "lecture-working-with-functions",
+            "workshop-calculator",
+            "lab-email-masker",
+            "workshop-shopping-list",
+            "lab-lunch-picker-program",
+            "workshop-wildlife-tracker",
+            "lecture-working-with-optional-chaining-and-object-destructuring",
+            "workshop-recipe-tracker",
+            "lab-quiz-game",
+            "workshop-word-counter",
+            "lab-profile-lookup",
+            "workshop-campus-directory-normalizer",
+            "lab-proofreading-tool",
+            "lecture-working-with-higher-order-functions-and-callbacks",
+            "workshop-library-manager",
+            "lab-book-organizer",
+            "lecture-introduction-to-the-dom",
+            "workshop-storytelling-app",
+            "lab-favorite-icon-toggler",
+            "lecture-working-with-client-side-storage-and-crud-operations-v2",
+            "workshop-todo-app",
+            "lab-bookmark-manager-app",
+            "lecture-understanding-asynchronous-programming",
+            "workshop-fcc-authors-page",
+            "lab-weather-app"
+          ]
         }
       ]
     }
